@@ -1,0 +1,4382 @@
+#VRML_SIM R2022a utf8
+WorldInfo {
+  basicTimeStep 16
+  FPS 30
+  contactProperties [
+    ContactProperties {
+      material1 "cacao"
+      material2 "separator"
+      bounce 1
+      bounceVelocity 0.1
+    }
+    ContactProperties {
+      material1 "cacao"
+      material2 "lolipop_head"
+      coulombFriction [
+        7
+      ]
+      bounce 0
+      bounceVelocity 0
+    }
+    ContactProperties {
+      material1 "cacao"
+      material2 "floor"
+      coulombFriction [
+        2
+      ]
+      forceDependentSlip [
+        0.001
+      ]
+    }
+    ContactProperties {
+      material1 "cacao"
+      material2 "guide"
+      bounce 0.05
+      forceDependentSlip [
+        0.001
+      ]
+    }
+    ContactProperties {
+      material1 "wheel"
+      material2 "floor"
+      forceDependentSlip [
+        0.001
+      ]
+    }
+  ]
+}
+Viewpoint {
+  orientation -0.23534317401299454 -0.390081940729408 0.8901964221239422 4.958424512882837
+  position -4.04860605173981 12.225811712842503 9.007861907897844
+  follow "cacaobot"
+  followType "None"
+  bloomThreshold 10
+}
+TexturedBackground {
+  skybox FALSE
+}
+TexturedBackgroundLight {
+  castShadows FALSE
+}
+RectangleArena {
+  translation -0.53 2.76 0
+  rotation 0 1 0 0
+  contactMaterial "floor"
+  floorSize 10 11
+  floorTileSize 1 1
+  wallHeight 1.5
+}
+DEF man Pedestrian {
+  translation -2.52161 5 1.27
+  rotation 2.31519e-08 -9.58979e-09 1 -0.785395307179586
+  enableBoundingObject TRUE
+}
+DEF cacaobot Robot {
+  translation 0 -1.06 -0.0190075
+  rotation 0.9999965831069 9.589756002083231e-09 -0.002614148910175633 5.30716e-06
+  children [
+    DEF Body Group {
+      children [
+        Transform {
+          translation 0 -0.696 0.416
+          rotation 0 1 0 0
+          children [
+            Shape {
+              appearance PBRAppearance {
+                baseColor 0 0.666667 0.498039
+                roughness 1
+                metalness 0
+              }
+              geometry DEF back Box {
+                size 0.656 0.56 0.48
+              }
+            }
+          ]
+        }
+        Transform {
+          translation -0.312 -0.008 0.272
+          children [
+            Shape {
+              appearance DEF frame PBRAppearance {
+                baseColor 0 0.333333 1
+                roughness 1
+                metalness 0
+              }
+              geometry Box {
+                size 0.04 0.96 0.08
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0.304 -0.008 0.2723
+          children [
+            Shape {
+              appearance DEF frame PBRAppearance {
+                baseColor 0 0.333333 1
+                roughness 1
+                metalness 0
+              }
+              geometry Box {
+                size 0.04 0.96 0.08
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0.264 -0.181916 0.418418
+          rotation 1 0 0 -0.523595307179586
+          children [
+            Shape {
+              appearance USE frame
+              geometry Box {
+                size 0.05 0.8 0.04
+              }
+            }
+          ]
+        }
+        Transform {
+          translation -0.272 -0.181916 0.418418
+          rotation 1 0 0 -0.523595307179586
+          children [
+            Shape {
+              appearance USE frame
+              geometry Box {
+                size 0.04 0.8 0.08
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0.182 0.0312 0.34
+          rotation 0 1 0 0
+          children [
+            Shape {
+              appearance DEF separator_apperance PBRAppearance {
+                baseColor 1 1 0.498039
+                roughness 1
+                metalness 0
+              }
+              geometry Box {
+                size 0.08 0.016 0.016
+              }
+            }
+          ]
+        }
+        Transform {
+          translation -0.184 0.032 0.34
+          rotation 0 1 0 0
+          children [
+            Shape {
+              appearance DEF separator_apperance PBRAppearance {
+                baseColor 1 1 0.498039
+                roughness 1
+                metalness 0
+              }
+              geometry Box {
+                size 0.08 0.016 0.016
+              }
+            }
+          ]
+        }
+        Transform {
+          translation -0.382 -0.321916 0.278418
+          rotation 1 0 0 3.46682e-06
+          children [
+            Shape {
+              appearance USE frame
+              geometry Box {
+                size 0.08 0.15 0.08
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0.368 -0.321916 0.278418
+          rotation 1 0 0 3.46682e-06
+          children [
+            Shape {
+              appearance USE frame
+              geometry Box {
+                size 0.08 0.15 0.08
+              }
+            }
+          ]
+        }
+      ]
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        axis -1 0 0
+        anchor -0.386 0 0.248054
+      }
+      device [
+        RotationalMotor {
+          name "wheel1"
+        }
+      ]
+      endPoint Solid {
+        translation -0.38654450023376774 -0.0008689798914523472 0.25098822719027647
+        rotation 0.0007193317003194292 -0.99999959792545 -0.0005354538666399834 1.5706476567178753
+        children [
+          Shape {
+            appearance DEF wheel_appearance PBRAppearance {
+              baseColor 0 0 0
+              roughness 1
+              metalness 0
+            }
+            geometry DEF wheel_shape Cylinder {
+              height 0.08
+              radius 0.24
+            }
+          }
+        ]
+        name "wheel1"
+        contactMaterial "wheel"
+        boundingObject USE wheel_shape
+        physics DEF wheel_ph Physics {
+          density -1
+          mass 2
+        }
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        axis -1 0 0
+        anchor 0.376 0 0.248
+      }
+      device [
+        RotationalMotor {
+          name "wheel2"
+        }
+      ]
+      endPoint Solid {
+        translation 0.3755027209922345 -0.0008774491631861133 0.2509516415728788
+        rotation -0.0005245759061838203 -0.9999996934552393 0.0005812998762560936 1.5705462197594333
+        children [
+          Shape {
+            appearance USE wheel_appearance
+            geometry USE wheel_shape
+          }
+        ]
+        name "wheel2"
+        contactMaterial "wheel"
+        boundingObject USE wheel_shape
+        physics USE wheel_ph
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        axis -1 0 0
+        anchor -0.376 -0.648 0.248
+      }
+      device [
+        RotationalMotor {
+          name "wheel3"
+        }
+      ]
+      endPoint Solid {
+        translation -0.3754742574749055 -0.6481417209767698 0.24857968296650015
+        rotation 0.003579465772562466 -0.9999869193210953 -0.003653575165257239 1.570829731242562
+        children [
+          Shape {
+            appearance USE wheel_appearance
+            geometry USE wheel_shape
+          }
+        ]
+        name "wheel3"
+        contactMaterial "wheel"
+        boundingObject USE wheel_shape
+        physics USE wheel_ph
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        axis -1 0 0
+        anchor 0.376 -0.648 0.247998
+      }
+      device [
+        RotationalMotor {
+          name "wheel4"
+        }
+      ]
+      endPoint Solid {
+        translation 0.37653955852096066 -0.6485198846347306 0.24859952211564482
+        rotation -0.002587236323851067 -0.9999931554378991 0.002644860215250675 1.570883322942942
+        children [
+          Shape {
+            appearance USE wheel_appearance
+            geometry USE wheel_shape
+          }
+        ]
+        name "wheel4"
+        contactMaterial "wheel"
+        boundingObject USE wheel_shape
+        physics DEF wheel_ph Physics {
+          density -1
+          mass 1
+        }
+      }
+    }
+    Transform {
+      translation 0.224 0 0.284
+      rotation 0 1 0 0
+      children [
+        Shape {
+          appearance USE frame
+          geometry Box {
+            size 0.136 0.096 0.096
+          }
+        }
+      ]
+    }
+    Transform {
+      translation -0.224 0 0.284
+      rotation 0 1 0 0
+      children [
+        Shape {
+          appearance USE frame
+          geometry Box {
+            size 0.136 0.096 0.096
+          }
+        }
+      ]
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        axis -1 0 0
+        anchor -0.8 0 0.29
+      }
+      device [
+        RotationalMotor {
+          name "disks"
+        }
+      ]
+      endPoint Solid {
+        translation 2.4992712530647054e-06 0.003260357732837537 0.2883118426260892
+        rotation 0.6566738258669461 -0.37162523418327975 -0.6562577022325073 2.4282097590249156
+        children [
+          Shape {
+            appearance PBRAppearance {
+              roughness 1
+              metalness 0
+            }
+            geometry DEF disk_holder Cylinder {
+              height 0.36
+              radius 0.036
+              subdivision 8
+            }
+            castShadows FALSE
+          }
+          Solid {
+            translation 0 0 -0.138
+            rotation 0 1 0 0
+            children [
+              DEF disk Group {
+                children [
+                  Shape {
+                    appearance PBRAppearance {
+                      baseColor 0.223529 0.223529 0.223529
+                      metalness 0
+                    }
+                    geometry Cylinder {
+                      height 0.03048
+                      radius 0.1216
+                    }
+                    castShadows FALSE
+                  }
+                ]
+              }
+              BallJoint {
+                jointParameters BallJointParameters {
+                  anchor 0 0.12 0
+                  springConstant 2
+                  dampingConstant 1e-06
+                }
+                endPoint Solid {
+                  translation -0.002867782393752348 0.1766413003151676 -0.0048144438251334475
+                  rotation -0.9994770024096101 -0.021831932945447715 0.023855572895358935 1.6566811510088362
+                  children [
+                    DEF lolipop_group Group {
+                      children [
+                        Shape {
+                          appearance PBRAppearance {
+                            baseColor 0.360784 0.360784 0
+                            metalness 0
+                          }
+                          geometry Cylinder {
+                            height 0.116
+                            radius 0.00325
+                            subdivision 3
+                          }
+                        }
+                      ]
+                    }
+                    Solid {
+                      translation 0 0 0.06
+                      children [
+                        DEF ball Shape {
+                          appearance DEF lolipop_base_color PBRAppearance {
+                            baseColor 1 1 0
+                            roughness 1
+                            metalness 0
+                          }
+                          geometry DEF ball Sphere {
+                            radius 0.02
+                            subdivision 2
+                          }
+                        }
+                      ]
+                      contactMaterial "lolipop_head"
+                      boundingObject USE ball
+                      physics Physics {
+                      }
+                    }
+                  ]
+                  name "lollipop"
+                  contactMaterial "cacao_pickup"
+                  boundingObject USE lolipop_group
+                  physics DEF lollipop_ph Physics {
+                    density -1
+                    mass 0.1
+                    centerOfMass [
+                      0 0 0
+                    ]
+                    inertiaMatrix [
+                      5.7e-05 5.7e-05 9.7e-06
+                      0 0 0
+                    ]
+                  }
+                }
+              }
+              BallJoint {
+                jointParameters BallJointParameters {
+                  anchor 0 -0.12 0
+                  springConstant 2
+                  dampingConstant 1e-06
+                }
+                endPoint Solid {
+                  translation -0.0031651810300218535 -0.17673245857586684 -0.006183206966961271
+                  rotation -0.020204600384126168 -0.7440672907754425 0.667799102216685 3.096049503243397
+                  children [
+                    USE lolipop_group
+                    Solid {
+                      translation 0 0 0.06
+                      children [
+                        Shape {
+                          appearance USE lolipop_base_color
+                          geometry USE ball
+                        }
+                      ]
+                      contactMaterial "lolipop_head"
+                      boundingObject USE ball
+                      physics Physics {
+                      }
+                    }
+                  ]
+                  name "lollipop(1)"
+                  contactMaterial "cacao_pickup"
+                  boundingObject USE lolipop_group
+                  physics USE lollipop_ph
+                }
+              }
+              BallJoint {
+                jointParameters BallJointParameters {
+                  anchor -0.12 0 0
+                  springConstant 2
+                  dampingConstant 1e-06
+                }
+                endPoint Solid {
+                  translation -0.17652899972946245 0.00695885427279471 -7.28750217251484e-05
+                  rotation -0.6286461772624253 -0.5469407918208248 0.5528650414484065 2.028737267154833
+                  children [
+                    Solid {
+                      translation 0 0 0.06
+                      children [
+                        Shape {
+                          appearance USE lolipop_base_color
+                          geometry USE ball
+                        }
+                      ]
+                      contactMaterial "lolipop_head"
+                      boundingObject USE ball
+                      physics Physics {
+                      }
+                    }
+                    USE lolipop_group
+                  ]
+                  name "lollipop(2)"
+                  contactMaterial "cacao_pickup"
+                  boundingObject USE lolipop_group
+                  physics USE lollipop_ph
+                }
+              }
+              BallJoint {
+                jointParameters BallJointParameters {
+                  anchor 0.12 0 0
+                  springConstant 2
+                  dampingConstant 1e-06
+                }
+                endPoint Solid {
+                  translation 0.17642815351691582 0.008332586533517537 0.00026807768716035425
+                  rotation -0.6271308091346143 0.5591420224416405 -0.5422795837702503 1.9933070162316067
+                  children [
+                    USE lolipop_group
+                    Solid {
+                      translation 0 0 0.06
+                      children [
+                        Shape {
+                          appearance USE lolipop_base_color
+                          geometry USE ball
+                        }
+                      ]
+                      contactMaterial "lolipop_head"
+                      boundingObject USE ball
+                      physics Physics {
+                      }
+                    }
+                  ]
+                  name "lollipop(3)"
+                  contactMaterial "cacao_pickup"
+                  boundingObject USE lolipop_group
+                  physics USE lollipop_ph
+                }
+              }
+              BallJoint {
+                jointParameters BallJointParameters {
+                  anchor 0.11551 -0.0375066 0
+                  springConstant 2
+                  dampingConstant 1e-06
+                }
+                endPoint Solid {
+                  translation 0.17210761935476449 -0.044921416465791744 -0.0004370030328260037
+                  rotation -0.5160812179187825 0.6220747769843455 -0.5887980539636176 2.1439681001994995
+                  children [
+                    Solid {
+                      translation 0 0 0.06
+                      children [
+                        Shape {
+                          appearance USE lolipop_base_color
+                          geometry USE ball
+                        }
+                      ]
+                      contactMaterial "lolipop_head"
+                      boundingObject USE ball
+                      physics Physics {
+                      }
+                    }
+                    USE lolipop_group
+                  ]
+                  name "lollipop(4)"
+                  contactMaterial "cacao_pickup"
+                  boundingObject USE lolipop_group
+                  physics USE lollipop_ph
+                }
+              }
+              BallJoint {
+                jointParameters BallJointParameters {
+                  anchor 0.098704 -0.0696 0
+                  springConstant 2
+                  dampingConstant 1e-06
+                }
+                endPoint Solid {
+                  translation 0.1509017212679691 -0.0927149458182223 -0.0018218720814110003
+                  rotation -0.4039387498757277 0.6710581211000972 -0.6217028908203995 2.3209147196094975
+                  children [
+                    Solid {
+                      translation 0 0 0.06
+                      children [
+                        Shape {
+                          appearance USE lolipop_base_color
+                          geometry USE ball
+                        }
+                      ]
+                      contactMaterial "lolipop_head"
+                      boundingObject USE ball
+                      physics Physics {
+                      }
+                    }
+                    USE lolipop_group
+                  ]
+                  name "lollipop(6)"
+                  contactMaterial "cacao_pickup"
+                  boundingObject USE lolipop_group
+                  physics USE lollipop_ph
+                }
+              }
+              BallJoint {
+                jointParameters BallJointParameters {
+                  anchor -0.11551 0.0375066 0
+                  springConstant 2
+                  dampingConstant 1e-06
+                }
+                endPoint Solid {
+                  translation -0.16870379779483113 0.057839729378825436 -0.000689888215474837
+                  rotation -0.7243146708888585 -0.47881051746449943 0.4960934850414213 1.920813164647071
+                  children [
+                    USE lolipop_group
+                    Solid {
+                      translation 0 0 0.06
+                      children [
+                        Shape {
+                          appearance USE lolipop_base_color
+                          geometry USE ball
+                        }
+                      ]
+                      contactMaterial "lolipop_head"
+                      boundingObject USE ball
+                      physics Physics {
+                      }
+                    }
+                  ]
+                  name "lollipop(5)"
+                  contactMaterial "cacao_pickup"
+                  boundingObject USE lolipop_group
+                  physics USE lollipop_ph
+                }
+              }
+              BallJoint {
+                jointParameters BallJointParameters {
+                  anchor -0.098704 0.0696 0
+                  springConstant 2
+                  dampingConstant 1e-06
+                }
+                endPoint Solid {
+                  translation -0.1456201437244474 0.101815432103535 -0.001780564112048379
+                  rotation -0.8113529024430394 -0.40137881170183665 0.42497237229504387 1.8329325145627209
+                  children [
+                    USE lolipop_group
+                    Solid {
+                      translation 0 0 0.06
+                      children [
+                        Shape {
+                          appearance USE lolipop_base_color
+                          geometry USE ball
+                        }
+                      ]
+                      contactMaterial "lolipop_head"
+                      boundingObject USE ball
+                      physics Physics {
+                      }
+                    }
+                  ]
+                  name "lollipop(7)"
+                  contactMaterial "cacao_pickup"
+                  boundingObject USE lolipop_group
+                  physics USE lollipop_ph
+                }
+              }
+              BallJoint {
+                jointParameters BallJointParameters {
+                  anchor 0.0733888 -0.097236 0
+                  springConstant 2
+                  dampingConstant 1e-06
+                }
+                endPoint Solid {
+                  translation 0.11167052735297753 -0.13935849526213956 -0.005248062453927741
+                  rotation 0.48333169139472787 0.8332101265174379 -0.26861005409758326 1.7485448999701168
+                  children [
+                    USE lolipop_group
+                    Solid {
+                      translation 0 0 0.06
+                      children [
+                        Shape {
+                          appearance USE lolipop_base_color
+                          geometry USE ball
+                        }
+                      ]
+                      contactMaterial "lolipop_head"
+                      boundingObject USE ball
+                      physics Physics {
+                      }
+                    }
+                  ]
+                  name "lollipop(8)"
+                  contactMaterial "cacao_pickup"
+                  boundingObject USE lolipop_group
+                  physics USE lollipop_ph
+                }
+              }
+              BallJoint {
+                jointParameters BallJointParameters {
+                  anchor -0.0733888 0.097236 0
+                  springConstant 2
+                  dampingConstant 1e-06
+                }
+                endPoint Solid {
+                  translation -0.1074410794153719 0.14271034639782462 -0.003483522555255497
+                  rotation -0.7041623418902683 0.3104788924371987 0.6385595145439331 2.444674839762517
+                  children [
+                    USE lolipop_group
+                    Solid {
+                      translation 0 0 0.06
+                      children [
+                        Shape {
+                          appearance USE lolipop_base_color
+                          geometry USE ball
+                        }
+                      ]
+                      contactMaterial "lolipop_head"
+                      boundingObject USE ball
+                      physics Physics {
+                      }
+                    }
+                  ]
+                  name "lollipop(9)"
+                  contactMaterial "cacao_pickup"
+                  boundingObject USE lolipop_group
+                  physics USE lollipop_ph
+                }
+              }
+              BallJoint {
+                jointParameters BallJointParameters {
+                  anchor -0.038562 0.11354 0
+                  springConstant 2
+                  dampingConstant 1e-06
+                }
+                endPoint Solid {
+                  translation -0.06297931186712577 0.16914346801882668 -0.00498429814837515
+                  rotation -0.9604169523079976 -0.12363543264127141 0.24962683652809237 1.7240808295527374
+                  children [
+                    USE lolipop_group
+                    Solid {
+                      translation 0 0 0.06
+                      children [
+                        Shape {
+                          appearance USE lolipop_base_color
+                          geometry USE ball
+                        }
+                      ]
+                      contactMaterial "lolipop_head"
+                      boundingObject USE ball
+                      physics Physics {
+                      }
+                    }
+                  ]
+                  name "lollipop(10)"
+                  contactMaterial "cacao_pickup"
+                  boundingObject USE lolipop_group
+                  physics USE lollipop_ph
+                }
+              }
+              BallJoint {
+                jointParameters BallJointParameters {
+                  anchor 0.038562 -0.11354 0.000301598
+                  springConstant 2
+                  dampingConstant 1e-06
+                }
+                endPoint Solid {
+                  translation 0.06401467876653617 -0.16881863459304586 -0.006296643347965683
+                  rotation -0.1855717271531422 0.726051964050303 -0.6621266340966032 2.904532273505882
+                  children [
+                    USE lolipop_group
+                    Solid {
+                      translation 0 0 0.06
+                      children [
+                        Shape {
+                          appearance USE lolipop_base_color
+                          geometry USE ball
+                        }
+                      ]
+                      contactMaterial "lolipop_head"
+                      boundingObject USE ball
+                      physics Physics {
+                      }
+                    }
+                  ]
+                  name "lollipop(11)"
+                  contactMaterial "cacao_pickup"
+                  boundingObject USE lolipop_group
+                  physics USE lollipop_ph
+                }
+              }
+              BallJoint {
+                jointParameters BallJointParameters {
+                  anchor -0.113802 -0.042415 0
+                  springConstant 2
+                  dampingConstant 1e-06
+                }
+                endPoint Solid {
+                  translation -0.17313412881939755 -0.05669312065596736 -0.00015506487881788154
+                  rotation 0.1306867016502226 -0.9865180320025705 0.09850461179843767 1.5782743625379339
+                  children [
+                    USE lolipop_group
+                    Solid {
+                      translation 0 0 0.06
+                      children [
+                        Shape {
+                          appearance USE lolipop_base_color
+                          geometry USE ball
+                        }
+                      ]
+                      contactMaterial "lolipop_head"
+                      boundingObject USE ball
+                      physics Physics {
+                      }
+                    }
+                  ]
+                  name "lollipop(12)"
+                  contactMaterial "cacao_pickup"
+                  boundingObject USE lolipop_group
+                  physics USE lollipop_ph
+                }
+              }
+              BallJoint {
+                jointParameters BallJointParameters {
+                  anchor -0.0947202 -0.07136 0
+                  springConstant 2
+                  dampingConstant 1e-06
+                }
+                endPoint Solid {
+                  translation -0.14716706592960016 -0.10259587032052259 -0.0012197785852815523
+                  rotation 0.28474364180522227 -0.9318028457354914 0.22508779427312173 1.6344856358820714
+                  children [
+                    USE lolipop_group
+                    Solid {
+                      translation 0 0 0.06
+                      children [
+                        Shape {
+                          appearance USE lolipop_base_color
+                          geometry USE ball
+                        }
+                      ]
+                      contactMaterial "lolipop_head"
+                      boundingObject USE ball
+                      physics Physics {
+                      }
+                    }
+                  ]
+                  name "lollipop(14)"
+                  contactMaterial "cacao_pickup"
+                  boundingObject USE lolipop_group
+                  physics USE lollipop_ph
+                }
+              }
+              BallJoint {
+                jointParameters BallJointParameters {
+                  anchor 0.113802 0.042415 0.00149135
+                  springConstant 2
+                  dampingConstant 1e-06
+                }
+                endPoint Solid {
+                  translation 0.16605714994457266 0.0739160250100232 0.000795455047349315
+                  rotation -0.6980237770265066 -0.19313599904223328 -0.6895370132049536 2.762264279048423
+                  children [
+                    USE lolipop_group
+                    Solid {
+                      translation 0 0 0.06
+                      children [
+                        Shape {
+                          appearance USE lolipop_base_color
+                          geometry USE ball
+                        }
+                      ]
+                      contactMaterial "lolipop_head"
+                      boundingObject USE ball
+                      physics Physics {
+                      }
+                    }
+                  ]
+                  name "lollipop(13)"
+                  contactMaterial "cacao_pickup"
+                  boundingObject USE lolipop_group
+                  physics USE lollipop_ph
+                }
+              }
+              BallJoint {
+                jointParameters BallJointParameters {
+                  anchor 0.0947202 0.0713605 0.00320256
+                  springConstant 2
+                  dampingConstant 1e-06
+                }
+                endPoint Solid {
+                  translation 0.13579639975252378 0.1163458418029677 0.0005252031922724602
+                  rotation -0.6866549149228401 -0.3061918570145068 -0.659356940139645 2.582871017781336
+                  children [
+                    USE lolipop_group
+                    Solid {
+                      translation 0 0 0.06
+                      children [
+                        Shape {
+                          appearance USE lolipop_base_color
+                          geometry USE ball
+                        }
+                      ]
+                      contactMaterial "lolipop_head"
+                      boundingObject USE ball
+                      physics Physics {
+                      }
+                    }
+                  ]
+                  name "lollipop(15)"
+                  contactMaterial "cacao_pickup"
+                  boundingObject USE lolipop_group
+                  physics USE lollipop_ph
+                }
+              }
+              BallJoint {
+                jointParameters BallJointParameters {
+                  anchor -0.070822 -0.0947397 7.5131e-08
+                  springConstant 2
+                  dampingConstant 1e-06
+                }
+                endPoint Solid {
+                  translation -0.10805590832493231 -0.14304596966847077 -0.004189437916632397
+                  rotation 0.43112356918263495 -0.8265076535546537 0.36196348809072765 1.801607339890111
+                  children [
+                    USE lolipop_group
+                    Solid {
+                      translation 0 0 0.06
+                      children [
+                        Shape {
+                          appearance USE lolipop_base_color
+                          geometry USE ball
+                        }
+                      ]
+                      contactMaterial "lolipop_head"
+                      boundingObject USE ball
+                      physics Physics {
+                      }
+                    }
+                  ]
+                  name "lollipop(16)"
+                  contactMaterial "cacao_pickup"
+                  boundingObject USE lolipop_group
+                  physics USE lollipop_ph
+                }
+              }
+              BallJoint {
+                jointParameters BallJointParameters {
+                  anchor -0.037118 -0.11271 0
+                  springConstant 2
+                  dampingConstant 1e-06
+                }
+                endPoint Solid {
+                  translation -0.05881524057571974 -0.1695891721573354 -0.005943263177315312
+                  rotation 0.5193008846749665 -0.7286620264803411 0.44651790819782344 1.9491921784246484
+                  children [
+                    USE lolipop_group
+                    Solid {
+                      translation 0 0 0.06
+                      children [
+                        Shape {
+                          appearance USE lolipop_base_color
+                          geometry USE ball
+                        }
+                      ]
+                      contactMaterial "lolipop_head"
+                      boundingObject USE ball
+                      physics Physics {
+                      }
+                    }
+                  ]
+                  name "lollipop(18)"
+                  contactMaterial "cacao_pickup"
+                  boundingObject USE lolipop_group
+                  physics USE lollipop_ph
+                }
+              }
+              BallJoint {
+                jointParameters BallJointParameters {
+                  anchor 0.070822 0.0947397 0
+                  springConstant 2
+                  dampingConstant 1e-06
+                }
+                endPoint Solid {
+                  translation 0.0952999775613861 0.1504289715282008 -0.0037594277764975083
+                  rotation -0.6498899935917208 -0.4369832804749167 -0.6218429132946143 2.3917322242167174
+                  children [
+                    USE lolipop_group
+                    Solid {
+                      translation 0 0 0.06
+                      children [
+                        Shape {
+                          appearance USE lolipop_base_color
+                          geometry USE ball
+                        }
+                      ]
+                      contactMaterial "lolipop_head"
+                      boundingObject USE ball
+                      physics Physics {
+                      }
+                    }
+                  ]
+                  name "lollipop(17)"
+                  contactMaterial "cacao_pickup"
+                  boundingObject USE lolipop_group
+                  physics USE lollipop_ph
+                }
+              }
+              BallJoint {
+                jointParameters BallJointParameters {
+                  anchor 0.037118 0.11271 0
+                  springConstant 2
+                  dampingConstant 1e-06
+                }
+                endPoint Solid {
+                  translation 0.047918083609762914 0.17247961798104347 -0.004902004168861406
+                  rotation -0.6215022414637188 -0.526363719384991 -0.5802380535355912 2.251817613719185
+                  children [
+                    USE lolipop_group
+                    Solid {
+                      translation 0 0 0.06
+                      children [
+                        Shape {
+                          appearance USE lolipop_base_color
+                          geometry USE ball
+                        }
+                      ]
+                      contactMaterial "lolipop_head"
+                      boundingObject USE ball
+                      physics Physics {
+                      }
+                    }
+                  ]
+                  name "lollipop(19)"
+                  contactMaterial "cacao_pickup"
+                  boundingObject USE lolipop_group
+                  physics USE lollipop_ph
+                }
+              }
+            ]
+            name "solid(10)"
+            contactMaterial ""
+            boundingObject USE disk
+            physics Physics {
+              density -1
+              mass 1
+              centerOfMass [
+                0.0004964075240797066 0 2.6683962694384078e-09
+              ]
+              inertiaMatrix [
+                0.015474887112992634 0.015695834201723817 0.030518910912255608
+                0 -1.1783490361212277e-09 0
+              ]
+              damping Damping {
+                linear 0.715292
+                angular 0.715292
+              }
+            }
+          }
+          Solid {
+            translation 0 0 0.042
+            rotation 0 0 1 -0.261795307179586
+            children [
+              DEF disk Group {
+                children [
+                  Shape {
+                    appearance PBRAppearance {
+                      baseColor 0.223529 0.223529 0.223529
+                      metalness 0
+                    }
+                    geometry Cylinder {
+                      height 0.03048
+                      radius 0.1216
+                    }
+                    castShadows FALSE
+                  }
+                ]
+              }
+              BallJoint {
+                jointParameters BallJointParameters {
+                  anchor 0 0.12 0
+                  springConstant 2
+                  dampingConstant 1e-06
+                }
+                endPoint Solid {
+                  translation -7.819892872346426e-17 0.17600000000000038 -1.682681771697503e-16
+                  rotation -0.9999999999999999 -3.9850316215613616e-16 -4.774678133721461e-16 1.5707953071790206
+                  children [
+                    DEF lolipop_group Group {
+                      children [
+                        Shape {
+                          appearance PBRAppearance {
+                            baseColor 0.360784 0.360784 0
+                            metalness 0
+                          }
+                          geometry Cylinder {
+                            height 0.116
+                            radius 0.00325
+                            subdivision 3
+                          }
+                        }
+                      ]
+                    }
+                    Solid {
+                      translation 0 0 0.06
+                      children [
+                        DEF ball Shape {
+                          appearance DEF lolipop_base_color PBRAppearance {
+                            baseColor 1 1 0
+                            roughness 1
+                            metalness 0
+                          }
+                          geometry DEF ball Sphere {
+                            radius 0.02
+                            subdivision 2
+                          }
+                        }
+                      ]
+                      contactMaterial "lolipop_head"
+                      boundingObject USE ball
+                      physics Physics {
+                      }
+                    }
+                  ]
+                  name "lollipop"
+                  contactMaterial "cacao_pickup"
+                  boundingObject USE lolipop_group
+                  physics DEF lollipop_ph Physics {
+                    density -1
+                    mass 0.1
+                    centerOfMass [
+                      0 0 0
+                    ]
+                    inertiaMatrix [
+                      5.7e-05 5.7e-05 9.7e-06
+                      0 0 0
+                    ]
+                  }
+                }
+              }
+              BallJoint {
+                jointParameters BallJointParameters {
+                  anchor 0 -0.12 0
+                  springConstant 2
+                  dampingConstant 1e-06
+                }
+                endPoint Solid {
+                  translation 1.3168199992380333e-07 -0.17599999999999844 -9.899470003633948e-08
+                  rotation -3.390500190068383e-09 0.7071072811865722 -0.7071062811861694 3.1415900000000008
+                  children [
+                    USE lolipop_group
+                    Solid {
+                      translation 0 0 0.06
+                      children [
+                        Shape {
+                          appearance USE lolipop_base_color
+                          geometry USE ball
+                        }
+                      ]
+                      contactMaterial "lolipop_head"
+                      boundingObject USE ball
+                      physics Physics {
+                      }
+                    }
+                  ]
+                  name "lollipop(1)"
+                  contactMaterial "cacao_pickup"
+                  boundingObject USE lolipop_group
+                  physics USE lollipop_ph
+                }
+              }
+              BallJoint {
+                jointParameters BallJointParameters {
+                  anchor -0.12 0 0
+                  springConstant 2
+                  dampingConstant 1e-06
+                }
+                endPoint Solid {
+                  translation -0.1759999999999959 -8.910470000103722e-08 -8.910469994248755e-08
+                  rotation -0.5773496025226412 -0.5773516025212894 0.5773496025226372 2.094395307179317
+                  children [
+                    Solid {
+                      translation 0 0 0.06
+                      children [
+                        Shape {
+                          appearance USE lolipop_base_color
+                          geometry USE ball
+                        }
+                      ]
+                      contactMaterial "lolipop_head"
+                      boundingObject USE ball
+                      physics Physics {
+                      }
+                    }
+                    USE lolipop_group
+                  ]
+                  name "lollipop(2)"
+                  contactMaterial "cacao_pickup"
+                  boundingObject USE lolipop_group
+                  physics USE lollipop_ph
+                }
+              }
+              BallJoint {
+                jointParameters BallJointParameters {
+                  anchor 0.12 0 0
+                  springConstant 2
+                  dampingConstant 1e-06
+                }
+                endPoint Solid {
+                  translation 0.17599999999999988 5.677195977324585e-17 -1.4709912975197081e-16
+                  rotation -0.5773499358561498 0.5773509358560132 -0.5773499358561373 2.094389999999932
+                  children [
+                    USE lolipop_group
+                    Solid {
+                      translation 0 0 0.06
+                      children [
+                        Shape {
+                          appearance USE lolipop_base_color
+                          geometry USE ball
+                        }
+                      ]
+                      contactMaterial "lolipop_head"
+                      boundingObject USE ball
+                      physics Physics {
+                      }
+                    }
+                  ]
+                  name "lollipop(3)"
+                  contactMaterial "cacao_pickup"
+                  boundingObject USE lolipop_group
+                  physics USE lollipop_ph
+                }
+              }
+              BallJoint {
+                jointParameters BallJointParameters {
+                  anchor 0.11551 -0.0375066 0
+                  springConstant 2
+                  dampingConstant 1e-06
+                }
+                endPoint Solid {
+                  translation 0.16959999999999895 -0.05199999999999974 1.8285900001966716e-07
+                  rotation -0.47690495958780593 0.6215159473336663 -0.6215139473338377 2.2515799999998705
+                  children [
+                    Solid {
+                      translation 0 0 0.06
+                      children [
+                        Shape {
+                          appearance USE lolipop_base_color
+                          geometry USE ball
+                        }
+                      ]
+                      contactMaterial "lolipop_head"
+                      boundingObject USE ball
+                      physics Physics {
+                      }
+                    }
+                    USE lolipop_group
+                  ]
+                  name "lollipop(4)"
+                  contactMaterial "cacao_pickup"
+                  boundingObject USE lolipop_group
+                  physics USE lollipop_ph
+                }
+              }
+              BallJoint {
+                jointParameters BallJointParameters {
+                  anchor 0.098704 -0.0696 0
+                  springConstant 2
+                  dampingConstant 1e-06
+                }
+                endPoint Solid {
+                  translation 0.14720000000000044 -0.09759999999999922 -3.327029983523982e-09
+                  rotation -0.3779641520502854 0.6546552633596853 -0.6546522633584718 2.4188499999999675
+                  children [
+                    Solid {
+                      translation 0 0 0.06
+                      children [
+                        Shape {
+                          appearance USE lolipop_base_color
+                          geometry USE ball
+                        }
+                      ]
+                      contactMaterial "lolipop_head"
+                      boundingObject USE ball
+                      physics Physics {
+                      }
+                    }
+                    USE lolipop_group
+                  ]
+                  name "lollipop(6)"
+                  contactMaterial "cacao_pickup"
+                  boundingObject USE lolipop_group
+                  physics USE lollipop_ph
+                }
+              }
+              BallJoint {
+                jointParameters BallJointParameters {
+                  anchor -0.11551 0.0375066 0
+                  springConstant 2
+                  dampingConstant 1e-06
+                }
+                endPoint Solid {
+                  translation -0.16959999999999562 0.051999999999998964 -3.380699998437942e-07
+                  rotation -0.6776590404813126 -0.5199930310628277 0.5199860310624119 1.9504453071794083
+                  children [
+                    USE lolipop_group
+                    Solid {
+                      translation 0 0 0.06
+                      children [
+                        Shape {
+                          appearance USE lolipop_base_color
+                          geometry USE ball
+                        }
+                      ]
+                      contactMaterial "lolipop_head"
+                      boundingObject USE ball
+                      physics Physics {
+                      }
+                    }
+                  ]
+                  name "lollipop(5)"
+                  contactMaterial "cacao_pickup"
+                  boundingObject USE lolipop_group
+                  physics USE lollipop_ph
+                }
+              }
+              BallJoint {
+                jointParameters BallJointParameters {
+                  anchor -0.098704 0.0696 0
+                  springConstant 2
+                  dampingConstant 1e-06
+                }
+                endPoint Solid {
+                  translation -0.1471999999999985 0.09759999999999816 1.960649980505035e-08
+                  rotation -0.7745939356444271 -0.4472189628437003 0.44721296284419376 1.8234753071793455
+                  children [
+                    USE lolipop_group
+                    Solid {
+                      translation 0 0 0.06
+                      children [
+                        Shape {
+                          appearance USE lolipop_base_color
+                          geometry USE ball
+                        }
+                      ]
+                      contactMaterial "lolipop_head"
+                      boundingObject USE ball
+                      physics Physics {
+                      }
+                    }
+                  ]
+                  name "lollipop(7)"
+                  contactMaterial "cacao_pickup"
+                  boundingObject USE lolipop_group
+                  physics USE lollipop_ph
+                }
+              }
+              BallJoint {
+                jointParameters BallJointParameters {
+                  anchor 0.0733888 -0.097236 0
+                  springConstant 2
+                  dampingConstant 1e-06
+                }
+                endPoint Solid {
+                  translation 0.10841799999999865 -0.14091599999999846 -0.0008662479999999566
+                  rotation 0.4688593251243142 0.8160377347211735 -0.3380138292364799 1.7177799999997936
+                  children [
+                    USE lolipop_group
+                    Solid {
+                      translation 0 0 0.06
+                      children [
+                        Shape {
+                          appearance USE lolipop_base_color
+                          geometry USE ball
+                        }
+                      ]
+                      contactMaterial "lolipop_head"
+                      boundingObject USE ball
+                      physics Physics {
+                      }
+                    }
+                  ]
+                  name "lollipop(8)"
+                  contactMaterial "cacao_pickup"
+                  boundingObject USE lolipop_group
+                  physics USE lollipop_ph
+                }
+              }
+              BallJoint {
+                jointParameters BallJointParameters {
+                  anchor -0.0733888 0.097236 0
+                  springConstant 2
+                  dampingConstant 1e-06
+                }
+                endPoint Solid {
+                  translation -0.10841799999999882 0.1409159999999993 2.0209528495129803e-16
+                  rotation -0.6987879380300883 0.27374397572384424 0.6608779413920249 2.4158053071795353
+                  children [
+                    USE lolipop_group
+                    Solid {
+                      translation 0 0 0.06
+                      children [
+                        Shape {
+                          appearance USE lolipop_base_color
+                          geometry USE ball
+                        }
+                      ]
+                      contactMaterial "lolipop_head"
+                      boundingObject USE ball
+                      physics Physics {
+                      }
+                    }
+                  ]
+                  name "lollipop(9)"
+                  contactMaterial "cacao_pickup"
+                  boundingObject USE lolipop_group
+                  physics USE lollipop_ph
+                }
+              }
+              BallJoint {
+                jointParameters BallJointParameters {
+                  anchor -0.038562 0.11354 0
+                  springConstant 2
+                  dampingConstant 1e-06
+                }
+                endPoint Solid {
+                  translation -0.06282480000000001 0.16841599999999918 9.04627999998072e-05
+                  rotation -0.9559370020737317 -0.14344101411476712 0.25614277958984805 1.6378353071793823
+                  children [
+                    USE lolipop_group
+                    Solid {
+                      translation 0 0 0.06
+                      children [
+                        Shape {
+                          appearance USE lolipop_base_color
+                          geometry USE ball
+                        }
+                      ]
+                      contactMaterial "lolipop_head"
+                      boundingObject USE ball
+                      physics Physics {
+                      }
+                    }
+                  ]
+                  name "lollipop(10)"
+                  contactMaterial "cacao_pickup"
+                  boundingObject USE lolipop_group
+                  physics USE lollipop_ph
+                }
+              }
+              BallJoint {
+                jointParameters BallJointParameters {
+                  anchor 0.038562 -0.11354 0.000301598
+                  springConstant 2
+                  dampingConstant 1e-06
+                }
+                endPoint Solid {
+                  translation 0.06282479999999949 -0.16841599999999782 0.00012063799999999654
+                  rotation -0.18812399565348314 0.6867919841320226 -0.7020869837786256 2.93167
+                  children [
+                    USE lolipop_group
+                    Solid {
+                      translation 0 0 0.06
+                      children [
+                        Shape {
+                          appearance USE lolipop_base_color
+                          geometry USE ball
+                        }
+                      ]
+                      contactMaterial "lolipop_head"
+                      boundingObject USE ball
+                      physics Physics {
+                      }
+                    }
+                  ]
+                  name "lollipop(11)"
+                  contactMaterial "cacao_pickup"
+                  boundingObject USE lolipop_group
+                  physics USE lollipop_ph
+                }
+              }
+              BallJoint {
+                jointParameters BallJointParameters {
+                  anchor -0.113802 -0.042415 0
+                  springConstant 2
+                  dampingConstant 1e-06
+                }
+                endPoint Solid {
+                  translation -0.16939799999999847 -0.06496599999999915 0.00026320500000002274
+                  rotation 0.19146832751668988 -0.9636365807320765 0.18639855104842892 1.597705307179393
+                  children [
+                    USE lolipop_group
+                    Solid {
+                      translation 0 0 0.06
+                      children [
+                        Shape {
+                          appearance USE lolipop_base_color
+                          geometry USE ball
+                        }
+                      ]
+                      contactMaterial "lolipop_head"
+                      boundingObject USE ball
+                      physics Physics {
+                      }
+                    }
+                  ]
+                  name "lollipop(12)"
+                  contactMaterial "cacao_pickup"
+                  boundingObject USE lolipop_group
+                  physics USE lollipop_ph
+                }
+              }
+              BallJoint {
+                jointParameters BallJointParameters {
+                  anchor -0.0947202 -0.07136 0
+                  springConstant 2
+                  dampingConstant 1e-06
+                }
+                endPoint Solid {
+                  translation -0.1410880000000002 -0.1094240000000006 0.0005651400000000794
+                  rotation 0.3255564936392628 -0.8900577404821315 0.3190770879539164 1.6633053071793547
+                  children [
+                    USE lolipop_group
+                    Solid {
+                      translation 0 0 0.06
+                      children [
+                        Shape {
+                          appearance USE lolipop_base_color
+                          geometry USE ball
+                        }
+                      ]
+                      contactMaterial "lolipop_head"
+                      boundingObject USE ball
+                      physics Physics {
+                      }
+                    }
+                  ]
+                  name "lollipop(14)"
+                  contactMaterial "cacao_pickup"
+                  boundingObject USE lolipop_group
+                  physics USE lollipop_ph
+                }
+              }
+              BallJoint {
+                jointParameters BallJointParameters {
+                  anchor 0.113802 0.042415 0.00149135
+                  springConstant 2
+                  dampingConstant 1e-06
+                }
+                endPoint Solid {
+                  translation 0.16939800000000121 0.06496600000000101 0.0009650279999999816
+                  rotation -0.7041880628811853 -0.1348400120406737 -0.6970920622475304 2.8663253071795864
+                  children [
+                    USE lolipop_group
+                    Solid {
+                      translation 0 0 0.06
+                      children [
+                        Shape {
+                          appearance USE lolipop_base_color
+                          geometry USE ball
+                        }
+                      ]
+                      contactMaterial "lolipop_head"
+                      boundingObject USE ball
+                      physics Physics {
+                      }
+                    }
+                  ]
+                  name "lollipop(13)"
+                  contactMaterial "cacao_pickup"
+                  boundingObject USE lolipop_group
+                  physics USE lollipop_ph
+                }
+              }
+              BallJoint {
+                jointParameters BallJointParameters {
+                  anchor 0.0947202 0.0713605 0.00320256
+                  springConstant 2
+                  dampingConstant 1e-06
+                }
+                endPoint Solid {
+                  translation 0.14108800000000046 0.10942399999999913 0.00207222000000003
+                  rotation -0.6940435039274724 -0.2429491763992724 -0.677701492061949 2.6556253071795375
+                  children [
+                    USE lolipop_group
+                    Solid {
+                      translation 0 0 0.06
+                      children [
+                        Shape {
+                          appearance USE lolipop_base_color
+                          geometry USE ball
+                        }
+                      ]
+                      contactMaterial "lolipop_head"
+                      boundingObject USE ball
+                      physics Physics {
+                      }
+                    }
+                  ]
+                  name "lollipop(15)"
+                  contactMaterial "cacao_pickup"
+                  boundingObject USE lolipop_group
+                  physics USE lollipop_ph
+                }
+              }
+              BallJoint {
+                jointParameters BallJointParameters {
+                  anchor -0.070822 -0.0947397 7.5131e-08
+                  springConstant 2
+                  dampingConstant 1e-06
+                }
+                endPoint Solid {
+                  translation -0.10082200000000091 -0.1467000000000023 -7.513130003496732e-08
+                  rotation 0.44721372362178075 -0.7745965212991125 0.44721372362177697 1.8234799999998283
+                  children [
+                    USE lolipop_group
+                    Solid {
+                      translation 0 0 0.06
+                      children [
+                        Shape {
+                          appearance USE lolipop_base_color
+                          geometry USE ball
+                        }
+                      ]
+                      contactMaterial "lolipop_head"
+                      boundingObject USE ball
+                      physics Physics {
+                      }
+                    }
+                  ]
+                  name "lollipop(16)"
+                  contactMaterial "cacao_pickup"
+                  boundingObject USE lolipop_group
+                  physics USE lollipop_ph
+                }
+              }
+              BallJoint {
+                jointParameters BallJointParameters {
+                  anchor -0.037118 -0.11271 0
+                  springConstant 2
+                  dampingConstant 1e-06
+                }
+                endPoint Solid {
+                  translation -0.052647199999999665 -0.17066399999999837 2.8933200022472627e-08
+                  rotation 0.5199881374825488 -0.6776611791705768 0.519988137482552 1.9504399999997997
+                  children [
+                    USE lolipop_group
+                    Solid {
+                      translation 0 0 0.06
+                      children [
+                        Shape {
+                          appearance USE lolipop_base_color
+                          geometry USE ball
+                        }
+                      ]
+                      contactMaterial "lolipop_head"
+                      boundingObject USE ball
+                      physics Physics {
+                      }
+                    }
+                  ]
+                  name "lollipop(18)"
+                  contactMaterial "cacao_pickup"
+                  boundingObject USE lolipop_group
+                  physics USE lollipop_ph
+                }
+              }
+              BallJoint {
+                jointParameters BallJointParameters {
+                  anchor 0.070822 0.0947397 0
+                  springConstant 2
+                  dampingConstant 1e-06
+                }
+                endPoint Solid {
+                  translation 0.10082199999999894 0.14669999999999866 -3.454429997919173e-07
+                  rotation -0.6546520159230992 -0.37796500919324283 -0.6546550159231762 2.418855307179556
+                  children [
+                    USE lolipop_group
+                    Solid {
+                      translation 0 0 0.06
+                      children [
+                        Shape {
+                          appearance USE lolipop_base_color
+                          geometry USE ball
+                        }
+                      ]
+                      contactMaterial "lolipop_head"
+                      boundingObject USE ball
+                      physics Physics {
+                      }
+                    }
+                  ]
+                  name "lollipop(17)"
+                  contactMaterial "cacao_pickup"
+                  boundingObject USE lolipop_group
+                  physics USE lollipop_ph
+                }
+              }
+              BallJoint {
+                jointParameters BallJointParameters {
+                  anchor 0.037118 0.11271 0
+                  springConstant 2
+                  dampingConstant 1e-06
+                }
+                endPoint Solid {
+                  translation 0.05264719999999989 0.1706639999999984 3.2967199810329806e-08
+                  rotation -0.6215153336152235 -0.47690525599185224 -0.6215143336146829 2.2515853071794636
+                  children [
+                    USE lolipop_group
+                    Solid {
+                      translation 0 0 0.06
+                      children [
+                        Shape {
+                          appearance USE lolipop_base_color
+                          geometry USE ball
+                        }
+                      ]
+                      contactMaterial "lolipop_head"
+                      boundingObject USE ball
+                      physics Physics {
+                      }
+                    }
+                  ]
+                  name "lollipop(19)"
+                  contactMaterial "cacao_pickup"
+                  boundingObject USE lolipop_group
+                  physics USE lollipop_ph
+                }
+              }
+            ]
+            name "solid(3)"
+            contactMaterial ""
+            boundingObject USE disk
+            physics Physics {
+              density -1
+              mass 1
+              centerOfMass [
+                0.0004964075240797066 0 2.6683962694384078e-09
+              ]
+              inertiaMatrix [
+                0.015474887112992634 0.015695834201723817 0.030518910912255608
+                0 -1.1783490361212277e-09 0
+              ]
+              damping Damping {
+                linear 0.715292
+                angular 0.715292
+              }
+            }
+          }
+          Solid {
+            translation 0 0 -0.048
+            rotation 0 0 1 -2.3561953071795863
+            children [
+              DEF disk Group {
+                children [
+                  Shape {
+                    appearance PBRAppearance {
+                      baseColor 0.223529 0.223529 0.223529
+                      metalness 0
+                    }
+                    geometry Cylinder {
+                      height 0.03048
+                      radius 0.1216
+                    }
+                    castShadows FALSE
+                  }
+                ]
+              }
+              BallJoint {
+                jointParameters BallJointParameters {
+                  anchor 0 0.12 0
+                  springConstant 2
+                  dampingConstant 1e-06
+                }
+                endPoint Solid {
+                  translation 2.7065667280090286e-17 0.1759999999999974 9.302454639925628e-17
+                  rotation -0.9999999999999999 2.1726790769751793e-15 7.551473926968065e-16 1.57079530717899
+                  children [
+                    DEF lolipop_group Group {
+                      children [
+                        Shape {
+                          appearance PBRAppearance {
+                            baseColor 0.360784 0.360784 0
+                            metalness 0
+                          }
+                          geometry Cylinder {
+                            height 0.116
+                            radius 0.00325
+                            subdivision 3
+                          }
+                        }
+                      ]
+                    }
+                    Solid {
+                      translation 0 0 0.06
+                      children [
+                        DEF ball Shape {
+                          appearance DEF lolipop_base_color PBRAppearance {
+                            baseColor 1 1 0
+                            roughness 1
+                            metalness 0
+                          }
+                          geometry DEF ball Sphere {
+                            radius 0.02
+                            subdivision 2
+                          }
+                        }
+                      ]
+                      contactMaterial "lolipop_head"
+                      boundingObject USE ball
+                      physics Physics {
+                      }
+                    }
+                  ]
+                  name "lollipop"
+                  contactMaterial "cacao_pickup"
+                  boundingObject USE lolipop_group
+                  physics DEF lollipop_ph Physics {
+                    density -1
+                    mass 0.1
+                    centerOfMass [
+                      0 0 0
+                    ]
+                    inertiaMatrix [
+                      5.7e-05 5.7e-05 9.7e-06
+                      0 0 0
+                    ]
+                  }
+                }
+              }
+              BallJoint {
+                jointParameters BallJointParameters {
+                  anchor 0 -0.12 0
+                  springConstant 2
+                  dampingConstant 1e-06
+                }
+                endPoint Solid {
+                  translation 1.3168199998395537e-07 -0.17599999999999946 -9.899469982188429e-08
+                  rotation -3.3904999552844034e-09 0.7071072811865682 -0.7071062811861734 3.141589999999998
+                  children [
+                    USE lolipop_group
+                    Solid {
+                      translation 0 0 0.06
+                      children [
+                        Shape {
+                          appearance USE lolipop_base_color
+                          geometry USE ball
+                        }
+                      ]
+                      contactMaterial "lolipop_head"
+                      boundingObject USE ball
+                      physics Physics {
+                      }
+                    }
+                  ]
+                  name "lollipop(1)"
+                  contactMaterial "cacao_pickup"
+                  boundingObject USE lolipop_group
+                  physics USE lollipop_ph
+                }
+              }
+              BallJoint {
+                jointParameters BallJointParameters {
+                  anchor -0.12 0 0
+                  springConstant 2
+                  dampingConstant 1e-06
+                }
+                endPoint Solid {
+                  translation -0.17599999999999896 -8.910469999360472e-08 -8.910470003089068e-08
+                  rotation -0.5773496025226469 -0.5773516025212767 0.5773496025226443 2.0943953071793775
+                  children [
+                    Solid {
+                      translation 0 0 0.06
+                      children [
+                        Shape {
+                          appearance USE lolipop_base_color
+                          geometry USE ball
+                        }
+                      ]
+                      contactMaterial "lolipop_head"
+                      boundingObject USE ball
+                      physics Physics {
+                      }
+                    }
+                    USE lolipop_group
+                  ]
+                  name "lollipop(2)"
+                  contactMaterial "cacao_pickup"
+                  boundingObject USE lolipop_group
+                  physics USE lollipop_ph
+                }
+              }
+              BallJoint {
+                jointParameters BallJointParameters {
+                  anchor 0.12 0 0
+                  springConstant 2
+                  dampingConstant 1e-06
+                }
+                endPoint Solid {
+                  translation 0.17600000000000093 1.864753621292183e-17 4.274467065024101e-17
+                  rotation -0.5773499358561353 0.5773509358560306 -0.5773499358561344 2.094389999999937
+                  children [
+                    USE lolipop_group
+                    Solid {
+                      translation 0 0 0.06
+                      children [
+                        Shape {
+                          appearance USE lolipop_base_color
+                          geometry USE ball
+                        }
+                      ]
+                      contactMaterial "lolipop_head"
+                      boundingObject USE ball
+                      physics Physics {
+                      }
+                    }
+                  ]
+                  name "lollipop(3)"
+                  contactMaterial "cacao_pickup"
+                  boundingObject USE lolipop_group
+                  physics USE lollipop_ph
+                }
+              }
+              BallJoint {
+                jointParameters BallJointParameters {
+                  anchor 0.11551 -0.0375066 0
+                  springConstant 2
+                  dampingConstant 1e-06
+                }
+                endPoint Solid {
+                  translation 0.16959999999999806 -0.05199999999999976 1.8285899996777454e-07
+                  rotation -0.47690495958779844 0.6215159473336711 -0.6215139473338388 2.251579999999855
+                  children [
+                    Solid {
+                      translation 0 0 0.06
+                      children [
+                        Shape {
+                          appearance USE lolipop_base_color
+                          geometry USE ball
+                        }
+                      ]
+                      contactMaterial "lolipop_head"
+                      boundingObject USE ball
+                      physics Physics {
+                      }
+                    }
+                    USE lolipop_group
+                  ]
+                  name "lollipop(4)"
+                  contactMaterial "cacao_pickup"
+                  boundingObject USE lolipop_group
+                  physics USE lollipop_ph
+                }
+              }
+              BallJoint {
+                jointParameters BallJointParameters {
+                  anchor 0.098704 -0.0696 0
+                  springConstant 2
+                  dampingConstant 1e-06
+                }
+                endPoint Solid {
+                  translation 0.14720000000000052 -0.09760000000000062 -3.3270299091680416e-09
+                  rotation -0.3779641520502835 0.6546552633596817 -0.6546522633584761 2.4188499999999893
+                  children [
+                    Solid {
+                      translation 0 0 0.06
+                      children [
+                        Shape {
+                          appearance USE lolipop_base_color
+                          geometry USE ball
+                        }
+                      ]
+                      contactMaterial "lolipop_head"
+                      boundingObject USE ball
+                      physics Physics {
+                      }
+                    }
+                    USE lolipop_group
+                  ]
+                  name "lollipop(6)"
+                  contactMaterial "cacao_pickup"
+                  boundingObject USE lolipop_group
+                  physics USE lollipop_ph
+                }
+              }
+              BallJoint {
+                jointParameters BallJointParameters {
+                  anchor -0.11551 0.0375066 0
+                  springConstant 2
+                  dampingConstant 1e-06
+                }
+                endPoint Solid {
+                  translation -0.16959999999999803 0.05199999999999956 -3.3806999994270056e-07
+                  rotation -0.6776590404813143 -0.5199930310628312 0.5199860310624059 1.950445307179392
+                  children [
+                    USE lolipop_group
+                    Solid {
+                      translation 0 0 0.06
+                      children [
+                        Shape {
+                          appearance USE lolipop_base_color
+                          geometry USE ball
+                        }
+                      ]
+                      contactMaterial "lolipop_head"
+                      boundingObject USE ball
+                      physics Physics {
+                      }
+                    }
+                  ]
+                  name "lollipop(5)"
+                  contactMaterial "cacao_pickup"
+                  boundingObject USE lolipop_group
+                  physics USE lollipop_ph
+                }
+              }
+              BallJoint {
+                jointParameters BallJointParameters {
+                  anchor -0.098704 0.0696 0
+                  springConstant 2
+                  dampingConstant 1e-06
+                }
+                endPoint Solid {
+                  translation -0.14719999999999922 0.09759999999999894 1.9606500042653255e-08
+                  rotation -0.7745939356444226 -0.44721896284370394 0.4472129628441978 1.8234753071793397
+                  children [
+                    USE lolipop_group
+                    Solid {
+                      translation 0 0 0.06
+                      children [
+                        Shape {
+                          appearance USE lolipop_base_color
+                          geometry USE ball
+                        }
+                      ]
+                      contactMaterial "lolipop_head"
+                      boundingObject USE ball
+                      physics Physics {
+                      }
+                    }
+                  ]
+                  name "lollipop(7)"
+                  contactMaterial "cacao_pickup"
+                  boundingObject USE lolipop_group
+                  physics USE lollipop_ph
+                }
+              }
+              BallJoint {
+                jointParameters BallJointParameters {
+                  anchor 0.0733888 -0.097236 0
+                  springConstant 2
+                  dampingConstant 1e-06
+                }
+                endPoint Solid {
+                  translation 0.10841800000000018 -0.14091599999999915 -0.0008662480000000393
+                  rotation 0.4688593251243211 0.8160377347211726 -0.33801382923647255 1.717779999999784
+                  children [
+                    USE lolipop_group
+                    Solid {
+                      translation 0 0 0.06
+                      children [
+                        Shape {
+                          appearance USE lolipop_base_color
+                          geometry USE ball
+                        }
+                      ]
+                      contactMaterial "lolipop_head"
+                      boundingObject USE ball
+                      physics Physics {
+                      }
+                    }
+                  ]
+                  name "lollipop(8)"
+                  contactMaterial "cacao_pickup"
+                  boundingObject USE lolipop_group
+                  physics USE lollipop_ph
+                }
+              }
+              BallJoint {
+                jointParameters BallJointParameters {
+                  anchor -0.0733888 0.097236 0
+                  springConstant 2
+                  dampingConstant 1e-06
+                }
+                endPoint Solid {
+                  translation -0.10841799999999863 0.14091599999999638 -6.635317295611287e-17
+                  rotation -0.6987879380300913 0.273743975723844 0.660877941392022 2.4158053071795353
+                  children [
+                    USE lolipop_group
+                    Solid {
+                      translation 0 0 0.06
+                      children [
+                        Shape {
+                          appearance USE lolipop_base_color
+                          geometry USE ball
+                        }
+                      ]
+                      contactMaterial "lolipop_head"
+                      boundingObject USE ball
+                      physics Physics {
+                      }
+                    }
+                  ]
+                  name "lollipop(9)"
+                  contactMaterial "cacao_pickup"
+                  boundingObject USE lolipop_group
+                  physics USE lollipop_ph
+                }
+              }
+              BallJoint {
+                jointParameters BallJointParameters {
+                  anchor -0.038562 0.11354 0
+                  springConstant 2
+                  dampingConstant 1e-06
+                }
+                endPoint Solid {
+                  translation -0.06282479999999878 0.16841599999999715 9.046280000015377e-05
+                  rotation -0.9559370020737346 -0.14344101411476515 0.2561427795898386 1.6378353071793776
+                  children [
+                    USE lolipop_group
+                    Solid {
+                      translation 0 0 0.06
+                      children [
+                        Shape {
+                          appearance USE lolipop_base_color
+                          geometry USE ball
+                        }
+                      ]
+                      contactMaterial "lolipop_head"
+                      boundingObject USE ball
+                      physics Physics {
+                      }
+                    }
+                  ]
+                  name "lollipop(10)"
+                  contactMaterial "cacao_pickup"
+                  boundingObject USE lolipop_group
+                  physics USE lollipop_ph
+                }
+              }
+              BallJoint {
+                jointParameters BallJointParameters {
+                  anchor 0.038562 -0.11354 0.000301598
+                  springConstant 2
+                  dampingConstant 1e-06
+                }
+                endPoint Solid {
+                  translation 0.0628247999999992 -0.16841599999999993 0.00012063799999990525
+                  rotation -0.18812399565348756 0.6867919841320215 -0.7020869837786256 2.93167
+                  children [
+                    USE lolipop_group
+                    Solid {
+                      translation 0 0 0.06
+                      children [
+                        Shape {
+                          appearance USE lolipop_base_color
+                          geometry USE ball
+                        }
+                      ]
+                      contactMaterial "lolipop_head"
+                      boundingObject USE ball
+                      physics Physics {
+                      }
+                    }
+                  ]
+                  name "lollipop(11)"
+                  contactMaterial "cacao_pickup"
+                  boundingObject USE lolipop_group
+                  physics USE lollipop_ph
+                }
+              }
+              BallJoint {
+                jointParameters BallJointParameters {
+                  anchor -0.113802 -0.042415 0
+                  springConstant 2
+                  dampingConstant 1e-06
+                }
+                endPoint Solid {
+                  translation -0.16939800000000016 -0.06496600000000005 0.00026320500000010677
+                  rotation 0.19146832751669424 -0.9636365807320769 0.1863985510484229 1.597705307179385
+                  children [
+                    USE lolipop_group
+                    Solid {
+                      translation 0 0 0.06
+                      children [
+                        Shape {
+                          appearance USE lolipop_base_color
+                          geometry USE ball
+                        }
+                      ]
+                      contactMaterial "lolipop_head"
+                      boundingObject USE ball
+                      physics Physics {
+                      }
+                    }
+                  ]
+                  name "lollipop(12)"
+                  contactMaterial "cacao_pickup"
+                  boundingObject USE lolipop_group
+                  physics USE lollipop_ph
+                }
+              }
+              BallJoint {
+                jointParameters BallJointParameters {
+                  anchor -0.0947202 -0.07136 0
+                  springConstant 2
+                  dampingConstant 1e-06
+                }
+                endPoint Solid {
+                  translation -0.14108799999999694 -0.10942399999999727 0.0005651399999999814
+                  rotation 0.3255564936392589 -0.8900577404821323 0.31907708795391804 1.66330530717937
+                  children [
+                    USE lolipop_group
+                    Solid {
+                      translation 0 0 0.06
+                      children [
+                        Shape {
+                          appearance USE lolipop_base_color
+                          geometry USE ball
+                        }
+                      ]
+                      contactMaterial "lolipop_head"
+                      boundingObject USE ball
+                      physics Physics {
+                      }
+                    }
+                  ]
+                  name "lollipop(14)"
+                  contactMaterial "cacao_pickup"
+                  boundingObject USE lolipop_group
+                  physics USE lollipop_ph
+                }
+              }
+              BallJoint {
+                jointParameters BallJointParameters {
+                  anchor 0.113802 0.042415 0.00149135
+                  springConstant 2
+                  dampingConstant 1e-06
+                }
+                endPoint Solid {
+                  translation 0.16939799999999888 0.06496599999999948 0.0009650280000000268
+                  rotation -0.7041880628811853 -0.13484001204067447 -0.6970920622475303 2.866325307179587
+                  children [
+                    USE lolipop_group
+                    Solid {
+                      translation 0 0 0.06
+                      children [
+                        Shape {
+                          appearance USE lolipop_base_color
+                          geometry USE ball
+                        }
+                      ]
+                      contactMaterial "lolipop_head"
+                      boundingObject USE ball
+                      physics Physics {
+                      }
+                    }
+                  ]
+                  name "lollipop(13)"
+                  contactMaterial "cacao_pickup"
+                  boundingObject USE lolipop_group
+                  physics USE lollipop_ph
+                }
+              }
+              BallJoint {
+                jointParameters BallJointParameters {
+                  anchor 0.0947202 0.0713605 0.00320256
+                  springConstant 2
+                  dampingConstant 1e-06
+                }
+                endPoint Solid {
+                  translation 0.14108799999999988 0.10942399999999958 0.002072220000000042
+                  rotation -0.6940435039274752 -0.2429491763992686 -0.6777014920619476 2.655625307179536
+                  children [
+                    USE lolipop_group
+                    Solid {
+                      translation 0 0 0.06
+                      children [
+                        Shape {
+                          appearance USE lolipop_base_color
+                          geometry USE ball
+                        }
+                      ]
+                      contactMaterial "lolipop_head"
+                      boundingObject USE ball
+                      physics Physics {
+                      }
+                    }
+                  ]
+                  name "lollipop(15)"
+                  contactMaterial "cacao_pickup"
+                  boundingObject USE lolipop_group
+                  physics USE lollipop_ph
+                }
+              }
+              BallJoint {
+                jointParameters BallJointParameters {
+                  anchor -0.070822 -0.0947397 7.5131e-08
+                  springConstant 2
+                  dampingConstant 1e-06
+                }
+                endPoint Solid {
+                  translation -0.10082199999999897 -0.14669999999999916 -7.513130039969293e-08
+                  rotation 0.44721372362177975 -0.774596521299114 0.4472137236217753 1.8234799999998226
+                  children [
+                    USE lolipop_group
+                    Solid {
+                      translation 0 0 0.06
+                      children [
+                        Shape {
+                          appearance USE lolipop_base_color
+                          geometry USE ball
+                        }
+                      ]
+                      contactMaterial "lolipop_head"
+                      boundingObject USE ball
+                      physics Physics {
+                      }
+                    }
+                  ]
+                  name "lollipop(16)"
+                  contactMaterial "cacao_pickup"
+                  boundingObject USE lolipop_group
+                  physics USE lollipop_ph
+                }
+              }
+              BallJoint {
+                jointParameters BallJointParameters {
+                  anchor -0.037118 -0.11271 0
+                  springConstant 2
+                  dampingConstant 1e-06
+                }
+                endPoint Solid {
+                  translation -0.05264719999999999 -0.17066399999999982 2.8933199857240216e-08
+                  rotation 0.5199881374825468 -0.6776611791705887 0.5199881374825384 1.9504399999998192
+                  children [
+                    USE lolipop_group
+                    Solid {
+                      translation 0 0 0.06
+                      children [
+                        Shape {
+                          appearance USE lolipop_base_color
+                          geometry USE ball
+                        }
+                      ]
+                      contactMaterial "lolipop_head"
+                      boundingObject USE ball
+                      physics Physics {
+                      }
+                    }
+                  ]
+                  name "lollipop(18)"
+                  contactMaterial "cacao_pickup"
+                  boundingObject USE lolipop_group
+                  physics USE lollipop_ph
+                }
+              }
+              BallJoint {
+                jointParameters BallJointParameters {
+                  anchor 0.070822 0.0947397 0
+                  springConstant 2
+                  dampingConstant 1e-06
+                }
+                endPoint Solid {
+                  translation 0.10082199999999741 0.14669999999999628 -3.4544299997146116e-07
+                  rotation -0.6546520159231003 -0.3779650091932453 -0.6546550159231735 2.4188553071795575
+                  children [
+                    USE lolipop_group
+                    Solid {
+                      translation 0 0 0.06
+                      children [
+                        Shape {
+                          appearance USE lolipop_base_color
+                          geometry USE ball
+                        }
+                      ]
+                      contactMaterial "lolipop_head"
+                      boundingObject USE ball
+                      physics Physics {
+                      }
+                    }
+                  ]
+                  name "lollipop(17)"
+                  contactMaterial "cacao_pickup"
+                  boundingObject USE lolipop_group
+                  physics USE lollipop_ph
+                }
+              }
+              BallJoint {
+                jointParameters BallJointParameters {
+                  anchor 0.037118 0.11271 0
+                  springConstant 2
+                  dampingConstant 1e-06
+                }
+                endPoint Solid {
+                  translation 0.052647200000000435 0.17066399999999976 3.2967199874948255e-08
+                  rotation -0.6215153336152234 -0.47690525599185396 -0.6215143336146818 2.2515853071794583
+                  children [
+                    USE lolipop_group
+                    Solid {
+                      translation 0 0 0.06
+                      children [
+                        Shape {
+                          appearance USE lolipop_base_color
+                          geometry USE ball
+                        }
+                      ]
+                      contactMaterial "lolipop_head"
+                      boundingObject USE ball
+                      physics Physics {
+                      }
+                    }
+                  ]
+                  name "lollipop(19)"
+                  contactMaterial "cacao_pickup"
+                  boundingObject USE lolipop_group
+                  physics USE lollipop_ph
+                }
+              }
+            ]
+            name "solid(1)"
+            contactMaterial ""
+            boundingObject USE disk
+            physics Physics {
+              density -1
+              mass 1
+              centerOfMass [
+                0.0004964075240797066 0 2.6683962694384078e-09
+              ]
+              inertiaMatrix [
+                0.015474887112992634 0.015695834201723817 0.030518910912255608
+                0 -1.1783490361212277e-09 0
+              ]
+              damping Damping {
+                linear 0.715292
+                angular 0.715292
+              }
+            }
+          }
+          Solid {
+            translation 0 0 0.132
+            rotation 0 0 1 -0.785395307179586
+            children [
+              DEF disk Group {
+                children [
+                  Shape {
+                    appearance PBRAppearance {
+                      baseColor 0.223529 0.223529 0.223529
+                      metalness 0
+                    }
+                    geometry Cylinder {
+                      height 0.03048
+                      radius 0.1216
+                    }
+                    castShadows FALSE
+                  }
+                ]
+              }
+              BallJoint {
+                jointParameters BallJointParameters {
+                  anchor 0 0.12 0
+                  springConstant 2
+                  dampingConstant 1e-06
+                }
+                endPoint Solid {
+                  translation 3.0981500595246916e-17 0.17599999999999894 -2.862293735361732e-17
+                  rotation -0.9999999999999999 5.481478843726005e-16 1.21413901097861e-15 1.5707953071789937
+                  children [
+                    DEF lolipop_group Group {
+                      children [
+                        Shape {
+                          appearance PBRAppearance {
+                            baseColor 0.360784 0.360784 0
+                            metalness 0
+                          }
+                          geometry Cylinder {
+                            height 0.116
+                            radius 0.00325
+                            subdivision 3
+                          }
+                        }
+                      ]
+                    }
+                    Solid {
+                      translation 0 0 0.06
+                      children [
+                        DEF ball Shape {
+                          appearance DEF lolipop_base_color PBRAppearance {
+                            baseColor 1 1 0
+                            roughness 1
+                            metalness 0
+                          }
+                          geometry DEF ball Sphere {
+                            radius 0.02
+                            subdivision 2
+                          }
+                        }
+                      ]
+                      contactMaterial "lolipop_head"
+                      boundingObject USE ball
+                      physics Physics {
+                      }
+                    }
+                  ]
+                  name "lollipop"
+                  contactMaterial "cacao_pickup"
+                  boundingObject USE lolipop_group
+                  physics DEF lollipop_ph Physics {
+                    density -1
+                    mass 0.1
+                    centerOfMass [
+                      0 0 0
+                    ]
+                    inertiaMatrix [
+                      5.7e-05 5.7e-05 9.7e-06
+                      0 0 0
+                    ]
+                  }
+                }
+              }
+              BallJoint {
+                jointParameters BallJointParameters {
+                  anchor 0 -0.12 0
+                  springConstant 2
+                  dampingConstant 1e-06
+                }
+                endPoint Solid {
+                  translation 1.3168199999051982e-07 -0.1759999999999982 -9.899469979000874e-08
+                  rotation -3.3905016909294504e-09 0.7071072811865708 -0.7071062811861707 3.14159
+                  children [
+                    USE lolipop_group
+                    Solid {
+                      translation 0 0 0.06
+                      children [
+                        Shape {
+                          appearance USE lolipop_base_color
+                          geometry USE ball
+                        }
+                      ]
+                      contactMaterial "lolipop_head"
+                      boundingObject USE ball
+                      physics Physics {
+                      }
+                    }
+                  ]
+                  name "lollipop(1)"
+                  contactMaterial "cacao_pickup"
+                  boundingObject USE lolipop_group
+                  physics USE lollipop_ph
+                }
+              }
+              BallJoint {
+                jointParameters BallJointParameters {
+                  anchor -0.12 0 0
+                  springConstant 2
+                  dampingConstant 1e-06
+                }
+                endPoint Solid {
+                  translation -0.1760000000000001 -8.910469992408703e-08 -8.910469997430888e-08
+                  rotation -0.5773496025226328 -0.5773516025212886 0.5773496025226464 2.094395307179361
+                  children [
+                    Solid {
+                      translation 0 0 0.06
+                      children [
+                        Shape {
+                          appearance USE lolipop_base_color
+                          geometry USE ball
+                        }
+                      ]
+                      contactMaterial "lolipop_head"
+                      boundingObject USE ball
+                      physics Physics {
+                      }
+                    }
+                    USE lolipop_group
+                  ]
+                  name "lollipop(2)"
+                  contactMaterial "cacao_pickup"
+                  boundingObject USE lolipop_group
+                  physics USE lollipop_ph
+                }
+              }
+              BallJoint {
+                jointParameters BallJointParameters {
+                  anchor 0.12 0 0
+                  springConstant 2
+                  dampingConstant 1e-06
+                }
+                endPoint Solid {
+                  translation 0.17599999999999966 1.389938714796944e-17 1.9136168344369153e-17
+                  rotation -0.5773499358561434 0.577350935856022 -0.5773499358561346 2.094389999999924
+                  children [
+                    USE lolipop_group
+                    Solid {
+                      translation 0 0 0.06
+                      children [
+                        Shape {
+                          appearance USE lolipop_base_color
+                          geometry USE ball
+                        }
+                      ]
+                      contactMaterial "lolipop_head"
+                      boundingObject USE ball
+                      physics Physics {
+                      }
+                    }
+                  ]
+                  name "lollipop(3)"
+                  contactMaterial "cacao_pickup"
+                  boundingObject USE lolipop_group
+                  physics USE lollipop_ph
+                }
+              }
+              BallJoint {
+                jointParameters BallJointParameters {
+                  anchor 0.11551 -0.0375066 0
+                  springConstant 2
+                  dampingConstant 1e-06
+                }
+                endPoint Solid {
+                  translation 0.16959999999999803 -0.05199999999999957 1.8285900009809564e-07
+                  rotation -0.47690495958780116 0.6215159473336667 -0.621513947333841 2.2515799999998674
+                  children [
+                    Solid {
+                      translation 0 0 0.06
+                      children [
+                        Shape {
+                          appearance USE lolipop_base_color
+                          geometry USE ball
+                        }
+                      ]
+                      contactMaterial "lolipop_head"
+                      boundingObject USE ball
+                      physics Physics {
+                      }
+                    }
+                    USE lolipop_group
+                  ]
+                  name "lollipop(4)"
+                  contactMaterial "cacao_pickup"
+                  boundingObject USE lolipop_group
+                  physics USE lollipop_ph
+                }
+              }
+              BallJoint {
+                jointParameters BallJointParameters {
+                  anchor 0.098704 -0.0696 0
+                  springConstant 2
+                  dampingConstant 1e-06
+                }
+                endPoint Solid {
+                  translation 0.14719999999999864 -0.0975999999999991 -3.327030187808e-09
+                  rotation -0.37796415205028966 0.6546552633596817 -0.654652263358473 2.4188499999999755
+                  children [
+                    Solid {
+                      translation 0 0 0.06
+                      children [
+                        Shape {
+                          appearance USE lolipop_base_color
+                          geometry USE ball
+                        }
+                      ]
+                      contactMaterial "lolipop_head"
+                      boundingObject USE ball
+                      physics Physics {
+                      }
+                    }
+                    USE lolipop_group
+                  ]
+                  name "lollipop(6)"
+                  contactMaterial "cacao_pickup"
+                  boundingObject USE lolipop_group
+                  physics USE lollipop_ph
+                }
+              }
+              BallJoint {
+                jointParameters BallJointParameters {
+                  anchor -0.11551 0.0375066 0
+                  springConstant 2
+                  dampingConstant 1e-06
+                }
+                endPoint Solid {
+                  translation -0.16959999999999623 0.051999999999999484 -3.380699999284433e-07
+                  rotation -0.6776590404813156 -0.5199930310628281 0.5199860310624079 1.9504453071793881
+                  children [
+                    USE lolipop_group
+                    Solid {
+                      translation 0 0 0.06
+                      children [
+                        Shape {
+                          appearance USE lolipop_base_color
+                          geometry USE ball
+                        }
+                      ]
+                      contactMaterial "lolipop_head"
+                      boundingObject USE ball
+                      physics Physics {
+                      }
+                    }
+                  ]
+                  name "lollipop(5)"
+                  contactMaterial "cacao_pickup"
+                  boundingObject USE lolipop_group
+                  physics USE lollipop_ph
+                }
+              }
+              BallJoint {
+                jointParameters BallJointParameters {
+                  anchor -0.098704 0.0696 0
+                  springConstant 2
+                  dampingConstant 1e-06
+                }
+                endPoint Solid {
+                  translation -0.14720000000000083 0.09760000000000058 1.96064999951652e-08
+                  rotation -0.7745939356444252 -0.44721896284370216 0.44721296284419504 1.823475307179327
+                  children [
+                    USE lolipop_group
+                    Solid {
+                      translation 0 0 0.06
+                      children [
+                        Shape {
+                          appearance USE lolipop_base_color
+                          geometry USE ball
+                        }
+                      ]
+                      contactMaterial "lolipop_head"
+                      boundingObject USE ball
+                      physics Physics {
+                      }
+                    }
+                  ]
+                  name "lollipop(7)"
+                  contactMaterial "cacao_pickup"
+                  boundingObject USE lolipop_group
+                  physics USE lollipop_ph
+                }
+              }
+              BallJoint {
+                jointParameters BallJointParameters {
+                  anchor 0.0733888 -0.097236 0
+                  springConstant 2
+                  dampingConstant 1e-06
+                }
+                endPoint Solid {
+                  translation 0.10841799999999892 -0.14091599999999882 -0.0008662479999999545
+                  rotation 0.4688593251243172 0.8160377347211751 -0.3380138292364722 1.717779999999814
+                  children [
+                    USE lolipop_group
+                    Solid {
+                      translation 0 0 0.06
+                      children [
+                        Shape {
+                          appearance USE lolipop_base_color
+                          geometry USE ball
+                        }
+                      ]
+                      contactMaterial "lolipop_head"
+                      boundingObject USE ball
+                      physics Physics {
+                      }
+                    }
+                  ]
+                  name "lollipop(8)"
+                  contactMaterial "cacao_pickup"
+                  boundingObject USE lolipop_group
+                  physics USE lollipop_ph
+                }
+              }
+              BallJoint {
+                jointParameters BallJointParameters {
+                  anchor -0.0733888 0.097236 0
+                  springConstant 2
+                  dampingConstant 1e-06
+                }
+                endPoint Solid {
+                  translation -0.10841800000000035 0.14091600000000137 1.196959198423997e-16
+                  rotation -0.6987879380300928 0.2737439757238425 0.660877941392021 2.415805307179545
+                  children [
+                    USE lolipop_group
+                    Solid {
+                      translation 0 0 0.06
+                      children [
+                        Shape {
+                          appearance USE lolipop_base_color
+                          geometry USE ball
+                        }
+                      ]
+                      contactMaterial "lolipop_head"
+                      boundingObject USE ball
+                      physics Physics {
+                      }
+                    }
+                  ]
+                  name "lollipop(9)"
+                  contactMaterial "cacao_pickup"
+                  boundingObject USE lolipop_group
+                  physics USE lollipop_ph
+                }
+              }
+              BallJoint {
+                jointParameters BallJointParameters {
+                  anchor -0.038562 0.11354 0
+                  springConstant 2
+                  dampingConstant 1e-06
+                }
+                endPoint Solid {
+                  translation -0.06282479999999946 0.16841599999999812 9.046280000012249e-05
+                  rotation -0.9559370020737338 -0.14344101411476518 0.2561427795898418 1.637835307179382
+                  children [
+                    USE lolipop_group
+                    Solid {
+                      translation 0 0 0.06
+                      children [
+                        Shape {
+                          appearance USE lolipop_base_color
+                          geometry USE ball
+                        }
+                      ]
+                      contactMaterial "lolipop_head"
+                      boundingObject USE ball
+                      physics Physics {
+                      }
+                    }
+                  ]
+                  name "lollipop(10)"
+                  contactMaterial "cacao_pickup"
+                  boundingObject USE lolipop_group
+                  physics USE lollipop_ph
+                }
+              }
+              BallJoint {
+                jointParameters BallJointParameters {
+                  anchor 0.038562 -0.11354 0.000301598
+                  springConstant 2
+                  dampingConstant 1e-06
+                }
+                endPoint Solid {
+                  translation 0.06282479999999988 -0.1684159999999996 0.00012063800000015093
+                  rotation -0.18812399565348356 0.6867919841320225 -0.7020869837786254 2.9316699999999996
+                  children [
+                    USE lolipop_group
+                    Solid {
+                      translation 0 0 0.06
+                      children [
+                        Shape {
+                          appearance USE lolipop_base_color
+                          geometry USE ball
+                        }
+                      ]
+                      contactMaterial "lolipop_head"
+                      boundingObject USE ball
+                      physics Physics {
+                      }
+                    }
+                  ]
+                  name "lollipop(11)"
+                  contactMaterial "cacao_pickup"
+                  boundingObject USE lolipop_group
+                  physics USE lollipop_ph
+                }
+              }
+              BallJoint {
+                jointParameters BallJointParameters {
+                  anchor -0.113802 -0.042415 0
+                  springConstant 2
+                  dampingConstant 1e-06
+                }
+                endPoint Solid {
+                  translation -0.16939799999999863 -0.06496599999999927 0.00026320500000001016
+                  rotation 0.19146832751669732 -0.9636365807320755 0.18639855104842729 1.5977053071793734
+                  children [
+                    USE lolipop_group
+                    Solid {
+                      translation 0 0 0.06
+                      children [
+                        Shape {
+                          appearance USE lolipop_base_color
+                          geometry USE ball
+                        }
+                      ]
+                      contactMaterial "lolipop_head"
+                      boundingObject USE ball
+                      physics Physics {
+                      }
+                    }
+                  ]
+                  name "lollipop(12)"
+                  contactMaterial "cacao_pickup"
+                  boundingObject USE lolipop_group
+                  physics USE lollipop_ph
+                }
+              }
+              BallJoint {
+                jointParameters BallJointParameters {
+                  anchor -0.0947202 -0.07136 0
+                  springConstant 2
+                  dampingConstant 1e-06
+                }
+                endPoint Solid {
+                  translation -0.14108799999999833 -0.10942399999999797 0.0005651399999998392
+                  rotation 0.3255564936392603 -0.8900577404821336 0.31907708795391354 1.6633053071793975
+                  children [
+                    USE lolipop_group
+                    Solid {
+                      translation 0 0 0.06
+                      children [
+                        Shape {
+                          appearance USE lolipop_base_color
+                          geometry USE ball
+                        }
+                      ]
+                      contactMaterial "lolipop_head"
+                      boundingObject USE ball
+                      physics Physics {
+                      }
+                    }
+                  ]
+                  name "lollipop(14)"
+                  contactMaterial "cacao_pickup"
+                  boundingObject USE lolipop_group
+                  physics USE lollipop_ph
+                }
+              }
+              BallJoint {
+                jointParameters BallJointParameters {
+                  anchor 0.113802 0.042415 0.00149135
+                  springConstant 2
+                  dampingConstant 1e-06
+                }
+                endPoint Solid {
+                  translation 0.16939800000000044 0.06496600000000004 0.0009650279999998682
+                  rotation -0.7041880628811752 -0.13484001204067417 -0.6970920622475405 2.8663253071795802
+                  children [
+                    USE lolipop_group
+                    Solid {
+                      translation 0 0 0.06
+                      children [
+                        Shape {
+                          appearance USE lolipop_base_color
+                          geometry USE ball
+                        }
+                      ]
+                      contactMaterial "lolipop_head"
+                      boundingObject USE ball
+                      physics Physics {
+                      }
+                    }
+                  ]
+                  name "lollipop(13)"
+                  contactMaterial "cacao_pickup"
+                  boundingObject USE lolipop_group
+                  physics USE lollipop_ph
+                }
+              }
+              BallJoint {
+                jointParameters BallJointParameters {
+                  anchor 0.0947202 0.0713605 0.00320256
+                  springConstant 2
+                  dampingConstant 1e-06
+                }
+                endPoint Solid {
+                  translation 0.14108799999999858 0.10942399999999944 0.002072219999999948
+                  rotation -0.6940435039274649 -0.24294917639927524 -0.6777014920619555 2.6556253071795344
+                  children [
+                    USE lolipop_group
+                    Solid {
+                      translation 0 0 0.06
+                      children [
+                        Shape {
+                          appearance USE lolipop_base_color
+                          geometry USE ball
+                        }
+                      ]
+                      contactMaterial "lolipop_head"
+                      boundingObject USE ball
+                      physics Physics {
+                      }
+                    }
+                  ]
+                  name "lollipop(15)"
+                  contactMaterial "cacao_pickup"
+                  boundingObject USE lolipop_group
+                  physics USE lollipop_ph
+                }
+              }
+              BallJoint {
+                jointParameters BallJointParameters {
+                  anchor -0.070822 -0.0947397 7.5131e-08
+                  springConstant 2
+                  dampingConstant 1e-06
+                }
+                endPoint Solid {
+                  translation -0.1008219999999991 -0.1466999999999995 -7.513129998769611e-08
+                  rotation 0.4472137236217791 -0.7745965212991119 0.44721372362177936 1.8234799999998472
+                  children [
+                    USE lolipop_group
+                    Solid {
+                      translation 0 0 0.06
+                      children [
+                        Shape {
+                          appearance USE lolipop_base_color
+                          geometry USE ball
+                        }
+                      ]
+                      contactMaterial "lolipop_head"
+                      boundingObject USE ball
+                      physics Physics {
+                      }
+                    }
+                  ]
+                  name "lollipop(16)"
+                  contactMaterial "cacao_pickup"
+                  boundingObject USE lolipop_group
+                  physics USE lollipop_ph
+                }
+              }
+              BallJoint {
+                jointParameters BallJointParameters {
+                  anchor -0.037118 -0.11271 0
+                  springConstant 2
+                  dampingConstant 1e-06
+                }
+                endPoint Solid {
+                  translation -0.052647200000000345 -0.1706640000000022 2.893320007885114e-08
+                  rotation 0.5199881374825417 -0.6776611791705873 0.5199881374825455 1.9504399999998292
+                  children [
+                    USE lolipop_group
+                    Solid {
+                      translation 0 0 0.06
+                      children [
+                        Shape {
+                          appearance USE lolipop_base_color
+                          geometry USE ball
+                        }
+                      ]
+                      contactMaterial "lolipop_head"
+                      boundingObject USE ball
+                      physics Physics {
+                      }
+                    }
+                  ]
+                  name "lollipop(18)"
+                  contactMaterial "cacao_pickup"
+                  boundingObject USE lolipop_group
+                  physics USE lollipop_ph
+                }
+              }
+              BallJoint {
+                jointParameters BallJointParameters {
+                  anchor 0.070822 0.0947397 0
+                  springConstant 2
+                  dampingConstant 1e-06
+                }
+                endPoint Solid {
+                  translation 0.10082199999999818 0.14669999999999817 -3.45443000038248e-07
+                  rotation -0.6546520159231007 -0.37796500919324083 -0.6546550159231759 2.418855307179553
+                  children [
+                    USE lolipop_group
+                    Solid {
+                      translation 0 0 0.06
+                      children [
+                        Shape {
+                          appearance USE lolipop_base_color
+                          geometry USE ball
+                        }
+                      ]
+                      contactMaterial "lolipop_head"
+                      boundingObject USE ball
+                      physics Physics {
+                      }
+                    }
+                  ]
+                  name "lollipop(17)"
+                  contactMaterial "cacao_pickup"
+                  boundingObject USE lolipop_group
+                  physics USE lollipop_ph
+                }
+              }
+              BallJoint {
+                jointParameters BallJointParameters {
+                  anchor 0.037118 0.11271 0
+                  springConstant 2
+                  dampingConstant 1e-06
+                }
+                endPoint Solid {
+                  translation 0.05264719999999883 0.17066399999999654 3.296720013168733e-08
+                  rotation -0.6215153336152245 -0.47690525599184974 -0.621514333614684 2.2515853071794663
+                  children [
+                    USE lolipop_group
+                    Solid {
+                      translation 0 0 0.06
+                      children [
+                        Shape {
+                          appearance USE lolipop_base_color
+                          geometry USE ball
+                        }
+                      ]
+                      contactMaterial "lolipop_head"
+                      boundingObject USE ball
+                      physics Physics {
+                      }
+                    }
+                  ]
+                  name "lollipop(19)"
+                  contactMaterial "cacao_pickup"
+                  boundingObject USE lolipop_group
+                  physics USE lollipop_ph
+                }
+              }
+            ]
+            name "solid(2)"
+            contactMaterial ""
+            boundingObject USE disk
+            physics Physics {
+              density -1
+              mass 1
+              centerOfMass [
+                0.0004964075240797066 0 2.6683962694384078e-09
+              ]
+              inertiaMatrix [
+                0.015474887112992634 0.015695834201723817 0.030518910912255608
+                0 -1.1783490361212277e-09 0
+              ]
+              damping Damping {
+                linear 0.715292
+                angular 0.715292
+              }
+            }
+          }
+        ]
+        name "disks"
+        boundingObject USE disk_holder
+        physics Physics {
+          density -1
+          mass 5
+        }
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        axis -1 0 0
+        anchor 0 0.53 0.25
+      }
+      device [
+        DEF containerSensor PositionSensor {
+          name "containerSensor"
+        }
+        RotationalMotor {
+          name "container"
+        }
+      ]
+      endPoint DEF container Solid {
+        translation -0.010007488764314594 0.496524236479725 0.19995845659790745
+        rotation -0.9999999980644503 -6.221781299872668e-05 -2.079449236054999e-07 0.017785464817964586
+        children [
+          DEF container Group {
+            children [
+              Transform {
+                translation 0.28 1.40785e-07 0.1
+                rotation 1 0 0 4.692820414042842e-06
+                children [
+                  DEF container_side Shape {
+                    appearance DEF container_apperarance PBRAppearance {
+                      baseColor 1 0.666667 0.498039
+                      roughness 1
+                      metalness 0
+                    }
+                    geometry Box {
+                      size 0.016 0.4 0.2
+                    }
+                  }
+                ]
+              }
+              Transform {
+                translation -0.27 0 0.1
+                rotation 0 1 0 0
+                children [
+                  USE container_side
+                ]
+              }
+              Transform {
+                translation 0 -0.2 0.03
+                children [
+                  Shape {
+                    appearance USE container_apperarance
+                    geometry Box {
+                      size 0.56 0.0016 0.072
+                    }
+                  }
+                ]
+              }
+              Transform {
+                translation 0 0.19 0.1
+                children [
+                  Shape {
+                    appearance USE container_apperarance
+                    geometry Box {
+                      size 0.56 0.016 0.2
+                    }
+                  }
+                ]
+              }
+              Shape {
+                appearance USE container_apperarance
+                geometry Box {
+                  size 0.56 0.4 0.016
+                }
+              }
+            ]
+          }
+          DEF container_bottom_sensor TouchSensor {
+            translation 0 0 0.01
+            children [
+              DEF container_bottom Shape {
+                appearance USE container_apperarance
+                geometry Box {
+                  size 0.51 0.33 0.001
+                }
+              }
+            ]
+            name "container_bottom_sensor"
+            boundingObject USE container_bottom
+          }
+        ]
+        name "solid(5)"
+        boundingObject USE container
+        physics Physics {
+          density -1
+          mass 1
+        }
+        recognitionColors [
+          1 0 0
+        ]
+      }
+    }
+    Solid {
+      translation 0 -0.676837 0.961325
+      rotation 1 0 0 -0.523595307179586
+      children [
+        Transform {
+          translation 0 0 -0.17
+          children [
+            Shape {
+              appearance PBRAppearance {
+                baseColor 0.239216 0.239216 0.239216
+                roughness 1
+                metalness 0
+              }
+              geometry Capsule {
+                height 0.46
+                radius 0.05
+              }
+            }
+          ]
+        }
+        Camera {
+          translation 5.18889e-08 0.07 0.05
+          rotation -3.69431e-07 -3.88407e-07 -1 -1.5708053071795867
+          children [
+            Shape {
+              appearance PBRAppearance {
+                baseColor 0.666667 0 0
+              }
+              geometry Sphere {
+                radius 0.03
+                subdivision 2
+              }
+            }
+            Transform {
+              translation -0.02 0 7.34639e-08
+              rotation 0 1 0 1.5708
+              children [
+                Shape {
+                  appearance PBRAppearance {
+                    baseColor 0 0 0
+                    roughness 1
+                    metalness 0
+                  }
+                  geometry Cylinder {
+                    height 0.05
+                    radius 0.05
+                  }
+                }
+              ]
+            }
+          ]
+          name "CAM"
+          fieldOfView 1
+          width 640
+          height 640
+          recognition DEF recog Recognition {
+            maxObjects 9
+            frameThickness 3
+          }
+        }
+      ]
+      name "cam"
+    }
+    Solid {
+      translation 0.01 -0.0682711 0.285036
+      rotation 1 0 0 -0.2618053071795865
+      children [
+        DEF separator Group {
+          children [
+            Transform {
+              translation -0.198 0.215389 0.0950767
+              rotation -1 0 0 0.26179530717958593
+              children [
+                Shape {
+                  appearance DEF separator_apperance PBRAppearance {
+                    baseColor 1 1 0.498039
+                    roughness 1
+                    metalness 0
+                  }
+                  geometry DEF separator_stick Box {
+                    size 0.016 0.256 0.016
+                  }
+                }
+              ]
+            }
+            Transform {
+              translation -0.08 0.215389 0.0950766
+              rotation -1 0 0 0.26179530717958593
+              children [
+                Shape {
+                  appearance USE separator_apperance
+                  geometry USE separator_stick
+                }
+              ]
+            }
+            Transform {
+              translation -0.11 0.215389 0.0950766
+              rotation -1 0 0 0.26179530717958593
+              children [
+                Shape {
+                  appearance USE separator_apperance
+                  geometry USE separator_stick
+                }
+              ]
+            }
+            Transform {
+              translation -0.18 0.215389 0.0950766
+              rotation -1 0 0 0.26179530717958593
+              children [
+                Shape {
+                  appearance USE separator_apperance
+                  geometry USE separator_stick
+                }
+              ]
+            }
+            Transform {
+              translation 0.1 0.215389 0.0950766
+              rotation -1 0 0 0.26179530717958593
+              children [
+                Shape {
+                  appearance USE separator_apperance
+                  geometry USE separator_stick
+                }
+              ]
+            }
+            Transform {
+              translation 0.2 0.215389 0.0950766
+              rotation -1 0 0 0.26179530717958593
+              children [
+                Shape {
+                  appearance USE separator_apperance
+                  geometry USE separator_stick
+                }
+              ]
+            }
+            Transform {
+              translation 0.17 0.215389 0.0950767
+              rotation -1 0 0 0.26179530717958593
+              children [
+                Shape {
+                  appearance USE separator_apperance
+                  geometry USE separator_stick
+                }
+              ]
+            }
+            Transform {
+              translation 0 0.34 0.07
+              rotation 0 1 0 0
+              children [
+                Shape {
+                  appearance DEF separator_apperance PBRAppearance {
+                    baseColor 1 1 0.498039
+                    roughness 1
+                    metalness 0
+                  }
+                  geometry Box {
+                    size 0.58 0.016 0.016
+                  }
+                }
+              ]
+            }
+            Transform {
+              translation -0.015 0.211673 0.0961306
+              rotation 1 0 0 -0.261795307179586
+              children [
+                Shape {
+                  appearance USE separator_apperance
+                  geometry USE separator_stick
+                }
+              ]
+            }
+            Transform {
+              translation 0.01 0.214389 0.0950767
+              rotation -1 0 0 0.26179530717958593
+              children [
+                Shape {
+                  appearance USE separator_apperance
+                  geometry USE separator_stick
+                }
+              ]
+            }
+            Transform {
+              translation 0.074 0.211675 0.0961257
+              rotation -1 0 0 0.26179530717958593
+              children [
+                Shape {
+                  appearance USE separator_apperance
+                  geometry USE separator_stick
+                }
+              ]
+            }
+          ]
+        }
+      ]
+      name "separator(1)"
+      contactMaterial "separator"
+      boundingObject USE separator
+      physics Physics {
+        density -1
+        mass 1
+        centerOfMass [
+          0 0 0
+        ]
+      }
+    }
+    Solid {
+      translation 0.299201 0.284349 0.14
+      rotation 0 0 1 -0.785395307179586
+      children [
+        DEF guide Shape {
+          appearance USE frame
+          geometry Box {
+            size 0.01 0.35 0.18
+          }
+        }
+      ]
+      contactMaterial "guide"
+      boundingObject USE guide
+      physics Physics {
+        density -1
+        mass 0.5
+      }
+    }
+    Solid {
+      translation -0.301836 0.291419 0.15
+      rotation 0 0 1 0.785401
+      children [
+        USE guide
+      ]
+      name "solid(1)"
+      contactMaterial "guide"
+      boundingObject USE guide
+      physics Physics {
+        density -1
+        mass 0.5
+      }
+    }
+    DEF body_bumper_sensor TouchSensor {
+      translation 0 -1 0.26
+      children [
+        DEF body_bumpers Group {
+          children [
+            Shape {
+              appearance PBRAppearance {
+                baseColor 0 0.666667 0.498039
+                roughness 1
+                metalness 0
+              }
+              geometry DEF back Box {
+                size 0.82 0.04 0.14
+              }
+            }
+            Transform {
+              translation -0.37 0.056 0
+              rotation 0 1 0 0
+              children [
+                Shape {
+                  appearance PBRAppearance {
+                    baseColor 0 0.666667 0.498039
+                    roughness 1
+                    metalness 0
+                  }
+                  geometry DEF back Box {
+                    size 0.08 0.07 0.14
+                  }
+                }
+              ]
+            }
+            Transform {
+              translation 0.37 0.056 0
+              rotation 0 1 0 0
+              children [
+                Shape {
+                  appearance PBRAppearance {
+                    baseColor 0 0.666667 0.498039
+                    roughness 1
+                    metalness 0
+                  }
+                  geometry DEF back Box {
+                    size 0.08 0.07 0.14
+                  }
+                }
+              ]
+            }
+            Transform {
+              translation -0.385 1.543 -0.0168
+              rotation 0 1 0 0
+              children [
+                Shape {
+                  appearance USE frame
+                  geometry DEF back Box {
+                    size 0.105 0.35 0.029
+                  }
+                }
+              ]
+            }
+            Transform {
+              translation 0.375 1.543 -0.0168
+              rotation 0 1 0 0
+              children [
+                Shape {
+                  appearance USE frame
+                  geometry DEF back Box {
+                    size 0.105 0.35 0.029
+                  }
+                }
+              ]
+            }
+            Transform {
+              translation 0.418 0.682 -0.0168
+              rotation 0 1 0 0
+              children [
+                Shape {
+                  appearance USE frame
+                  geometry DEF back Box {
+                    size 0.001 1.36 0.03
+                  }
+                }
+              ]
+            }
+            Transform {
+              translation -0.432 0.682 -0.0168
+              rotation 0 1 0 0
+              children [
+                Shape {
+                  appearance USE frame
+                  geometry DEF back Box {
+                    size 0.001 1.36 0.03
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+      name "body_bumper_sensor"
+      boundingObject USE body_bumpers
+      physics Physics {
+        density -1
+        mass 1
+      }
+    }
+    DEF gps GPS {
+    }
+    DEF lidar Lidar {
+      translation 7.34642e-08 -0.43 0.66
+      rotation 0 0 1 1.5708
+      horizontalResolution 12
+      fieldOfView 0.8
+      verticalFieldOfView 0.1
+      numberOfLayers 1
+      maxRange 3
+    }
+    DEF lidar2 Lidar {
+      translation 2.06013e-07 -0.56 0.66
+      rotation 0 0 1 -1.5707953071795862
+      name "lidar2"
+      horizontalResolution 36
+      fieldOfView 5.5
+      verticalFieldOfView 0.1
+      numberOfLayers 1
+      maxRange 3
+    }
+  ]
+  name "cacaobot"
+  boundingObject USE Body
+  physics Physics {
+    density -1
+    mass 30
+    centerOfMass [
+      0 -0.0125 0
+    ]
+  }
+  controller "cacaobot"
+  supervisor TRUE
+}
+DEF collection_area Solid {
+  translation 0.83 6.48 -0.04
+  children [
+    Shape {
+      geometry DEF gatherarea Box {
+        size 2 2 0.081
+      }
+    }
+  ]
+  name "collection_area"
+  model "collection_area"
+  boundingObject USE gatherarea
+  recognitionColors [
+    0 0 1
+  ]
+}
+DEF cacao0 Solid {
+  translation -3.46624 2.68391 0.0584282
+  rotation 0.7070992811436049 7.252082883437699e-07 -0.7071142811495689 -3.1415853071795863
+  scale 1.1 1.1 1.1
+  children [
+    DEF ugly_cacao Group {
+      children [
+        Transform {
+          translation -0.02 0 0
+          children [
+            Shape {
+              appearance DEF cacao1 PBRAppearance {
+                baseColor 1 0.333333 0
+                metalness 0
+              }
+              geometry Cylinder {
+                height 0.15
+                radius 0.03
+              }
+            }
+          ]
+        }
+        Transform {
+          translation -0.01 0.02 0
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Cylinder {
+                height 0.15
+                radius 0.03
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0.01 0.02 0
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Cylinder {
+                height 0.15
+                radius 0.03
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0.02 0 0
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Cylinder {
+                height 0.15
+                radius 0.03
+              }
+            }
+          ]
+        }
+        Transform {
+          translation -0.01 -0.02 0
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Cylinder {
+                height 0.15
+                radius 0.03
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0.01 -0.02 0
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Cylinder {
+                height 0.15
+                radius 0.03
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0 0 0.06
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Sphere {
+                radius 0.05215
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0 6.10065e-07 -0.06
+          rotation 1 0 0 4.692820414042842e-06
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Sphere {
+                radius 0.05215
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0 7.03921e-07 -0.08
+          rotation 1 0 0 4.692820414042842e-06
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Sphere {
+                radius 0.045
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0 7.97777e-07 -0.1
+          rotation 1 0 0 4.692820414042842e-06
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Sphere {
+                radius 0.03
+              }
+            }
+          ]
+        }
+        Shape {
+          appearance USE cacao1
+          geometry Capsule {
+            height 0.16
+            radius 0.04
+          }
+        }
+      ]
+    }
+  ]
+  name "cacao0"
+  model "cacao"
+  contactMaterial "cacao"
+  boundingObject USE ugly_cacao
+  physics Physics {
+    density -1
+    mass 0.5
+  }
+  recognitionColors [
+    1 0 0
+  ]
+}
+DEF cacao2 Solid {
+  translation -0.0273435 0.486508 0.202772
+  rotation 0.7040541500256862 -0.09269071975130581 -0.7040711500293086 -2.9567353071795863
+  children [
+    DEF ugly_cacao Group {
+      children [
+        Transform {
+          translation -0.02 0 0
+          children [
+            Shape {
+              appearance DEF cacao1 PBRAppearance {
+                baseColor 1 0.333333 0
+                metalness 0
+              }
+              geometry Cylinder {
+                height 0.15
+                radius 0.03
+              }
+            }
+          ]
+        }
+        Transform {
+          translation -0.01 0.02 0
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Cylinder {
+                height 0.15
+                radius 0.03
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0.01 0.02 0
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Cylinder {
+                height 0.15
+                radius 0.03
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0.02 0 0
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Cylinder {
+                height 0.15
+                radius 0.03
+              }
+            }
+          ]
+        }
+        Transform {
+          translation -0.01 -0.02 0
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Cylinder {
+                height 0.15
+                radius 0.03
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0.01 -0.02 0
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Cylinder {
+                height 0.15
+                radius 0.03
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0 0 0.06
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Sphere {
+                radius 0.05215
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0 6.10065e-07 -0.06
+          rotation 1 0 0 4.692820414042842e-06
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Sphere {
+                radius 0.05215
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0 7.03921e-07 -0.08
+          rotation 1 0 0 4.692820414042842e-06
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Sphere {
+                radius 0.045
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0 7.97777e-07 -0.1
+          rotation 1 0 0 4.692820414042842e-06
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Sphere {
+                radius 0.03
+              }
+            }
+          ]
+        }
+        Shape {
+          appearance USE cacao1
+          geometry Capsule {
+            height 0.16
+            radius 0.04
+          }
+        }
+      ]
+    }
+  ]
+  name "cacao2"
+  model "cacao"
+  contactMaterial "cacao"
+  boundingObject USE ugly_cacao
+  physics Physics {
+    density -1
+    mass 0.5
+  }
+  recognitionColors [
+    1 0 0
+  ]
+}
+DEF cacao3 Solid {
+  translation 1.39866 3.96834 0.052752
+  rotation 0.7070992811436049 7.252082883437699e-07 -0.7071142811495689 -3.1415853071795863
+  scale 1.1 1.1 1.1
+  children [
+    DEF ugly_cacao Group {
+      children [
+        Transform {
+          translation -0.02 0 0
+          children [
+            Shape {
+              appearance DEF cacao1 PBRAppearance {
+                baseColor 1 0.333333 0
+                metalness 0
+              }
+              geometry Cylinder {
+                height 0.15
+                radius 0.03
+              }
+            }
+          ]
+        }
+        Transform {
+          translation -0.01 0.02 0
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Cylinder {
+                height 0.15
+                radius 0.03
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0.01 0.02 0
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Cylinder {
+                height 0.15
+                radius 0.03
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0.02 0 0
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Cylinder {
+                height 0.15
+                radius 0.03
+              }
+            }
+          ]
+        }
+        Transform {
+          translation -0.01 -0.02 0
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Cylinder {
+                height 0.15
+                radius 0.03
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0.01 -0.02 0
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Cylinder {
+                height 0.15
+                radius 0.03
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0 0 0.06
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Sphere {
+                radius 0.05215
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0 6.10065e-07 -0.06
+          rotation 1 0 0 4.692820414042842e-06
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Sphere {
+                radius 0.05215
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0 7.03921e-07 -0.08
+          rotation 1 0 0 4.692820414042842e-06
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Sphere {
+                radius 0.045
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0 7.97777e-07 -0.1
+          rotation 1 0 0 4.692820414042842e-06
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Sphere {
+                radius 0.03
+              }
+            }
+          ]
+        }
+        Shape {
+          appearance USE cacao1
+          geometry Capsule {
+            height 0.16
+            radius 0.04
+          }
+        }
+      ]
+    }
+  ]
+  name "cacao3"
+  model "cacao"
+  contactMaterial "cacao"
+  boundingObject USE ugly_cacao
+  physics Physics {
+    density -1
+    mass 0.5
+  }
+  recognitionColors [
+    1 0 0
+  ]
+}
+DEF cacao4 Solid {
+  translation 0.051191 1.36538 0.0527717
+  rotation 0.5773459358484986 0.5773529358477207 -0.5773519358478318 2.09442
+  scale 0.9 0.9 0.9
+  children [
+    DEF ugly_cacao Group {
+      children [
+        Transform {
+          translation -0.02 0 0
+          children [
+            Shape {
+              appearance DEF cacao1 PBRAppearance {
+                baseColor 1 0.333333 0
+                metalness 0
+              }
+              geometry Cylinder {
+                height 0.15
+                radius 0.03
+              }
+            }
+          ]
+        }
+        Transform {
+          translation -0.01 0.02 0
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Cylinder {
+                height 0.15
+                radius 0.03
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0.01 0.02 0
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Cylinder {
+                height 0.15
+                radius 0.03
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0.02 0 0
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Cylinder {
+                height 0.15
+                radius 0.03
+              }
+            }
+          ]
+        }
+        Transform {
+          translation -0.01 -0.02 0
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Cylinder {
+                height 0.15
+                radius 0.03
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0.01 -0.02 0
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Cylinder {
+                height 0.15
+                radius 0.03
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0 0 0.06
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Sphere {
+                radius 0.05215
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0 6.10065e-07 -0.06
+          rotation 1 0 0 4.692820414042842e-06
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Sphere {
+                radius 0.05215
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0 7.03921e-07 -0.08
+          rotation 1 0 0 4.692820414042842e-06
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Sphere {
+                radius 0.045
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0 7.97777e-07 -0.1
+          rotation 1 0 0 4.692820414042842e-06
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Sphere {
+                radius 0.03
+              }
+            }
+          ]
+        }
+        Shape {
+          appearance USE cacao1
+          geometry Capsule {
+            height 0.16
+            radius 0.04
+          }
+        }
+      ]
+    }
+  ]
+  name "cacao4"
+  model "cacao"
+  contactMaterial "cacao"
+  boundingObject USE ugly_cacao
+  physics Physics {
+    density -1
+    mass 0.5
+  }
+  recognitionColors [
+    1 0 0
+  ]
+}
+DEF cacao5 Solid {
+  translation 0.0611853 2.66538 0.05277
+  rotation 0.5773459358484986 0.5773529358477207 -0.5773519358478318 2.09442
+  scale 0.9 0.9 0.9
+  children [
+    DEF ugly_cacao Group {
+      children [
+        Transform {
+          translation -0.02 0 0
+          children [
+            Shape {
+              appearance DEF cacao1 PBRAppearance {
+                baseColor 1 0.333333 0
+                metalness 0
+              }
+              geometry Cylinder {
+                height 0.15
+                radius 0.03
+              }
+            }
+          ]
+        }
+        Transform {
+          translation -0.01 0.02 0
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Cylinder {
+                height 0.15
+                radius 0.03
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0.01 0.02 0
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Cylinder {
+                height 0.15
+                radius 0.03
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0.02 0 0
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Cylinder {
+                height 0.15
+                radius 0.03
+              }
+            }
+          ]
+        }
+        Transform {
+          translation -0.01 -0.02 0
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Cylinder {
+                height 0.15
+                radius 0.03
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0.01 -0.02 0
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Cylinder {
+                height 0.15
+                radius 0.03
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0 0 0.06
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Sphere {
+                radius 0.05215
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0 6.10065e-07 -0.06
+          rotation 1 0 0 4.692820414042842e-06
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Sphere {
+                radius 0.05215
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0 7.03921e-07 -0.08
+          rotation 1 0 0 4.692820414042842e-06
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Sphere {
+                radius 0.045
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0 7.97777e-07 -0.1
+          rotation 1 0 0 4.692820414042842e-06
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Sphere {
+                radius 0.03
+              }
+            }
+          ]
+        }
+        Shape {
+          appearance USE cacao1
+          geometry Capsule {
+            height 0.16
+            radius 0.04
+          }
+        }
+      ]
+    }
+  ]
+  name "cacao5"
+  model "cacao"
+  contactMaterial "cacao"
+  boundingObject USE ugly_cacao
+  physics Physics {
+    density -1
+    mass 0.5
+  }
+  recognitionColors [
+    1 0 0
+  ]
+}

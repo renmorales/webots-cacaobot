@@ -1,0 +1,2212 @@
+#VRML_SIM R2022a utf8
+WorldInfo {
+  basicTimeStep 128
+  FPS 30
+  contactProperties [
+    ContactProperties {
+      material1 "wheel"
+      material2 "floor"
+      forceDependentSlip [
+        0.001
+      ]
+    }
+  ]
+}
+Viewpoint {
+  orientation -0.4476276169703051 0.46790744043298965 0.7620315897080213 1.7168316550878036
+  position 0.06543519151367949 -6.589922718315034 6.001546012639798
+  follow "cacaobot"
+  followType "None"
+  bloomThreshold 2
+}
+TexturedBackground {
+  skybox FALSE
+}
+TexturedBackgroundLight {
+  castShadows FALSE
+}
+RectangleArena {
+  rotation 0 1 0 0
+  contactMaterial "floor"
+  floorSize 12 12
+  floorTileSize 1 1
+  wallHeight 1.5
+}
+DEF cacaobot Robot {
+  translation -0.13 -4.02 -0.0190099
+  children [
+    DEF Body Group {
+      children [
+        Transform {
+          translation 0 -0.696 0.416
+          rotation 0 1 0 0
+          children [
+            Shape {
+              appearance PBRAppearance {
+                baseColor 0 0.666667 0.498039
+                roughness 1
+                metalness 0
+              }
+              geometry DEF back Box {
+                size 0.656 0.56 0.48
+              }
+            }
+          ]
+        }
+        Transform {
+          translation -0.312 -0.008 0.272
+          children [
+            Shape {
+              appearance DEF frame PBRAppearance {
+                baseColor 0 0.333333 1
+                roughness 1
+                metalness 0
+              }
+              geometry Box {
+                size 0.04 0.96 0.08
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0.304 -0.008 0.2723
+          children [
+            Shape {
+              appearance DEF frame PBRAppearance {
+                baseColor 0 0.333333 1
+                roughness 1
+                metalness 0
+              }
+              geometry Box {
+                size 0.04 0.96 0.08
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0.264 -0.181916 0.418418
+          rotation 1 0 0 -0.523595307179586
+          children [
+            Shape {
+              appearance USE frame
+              geometry Box {
+                size 0.05 0.8 0.04
+              }
+            }
+          ]
+        }
+        Transform {
+          translation -0.272 -0.181916 0.418418
+          rotation 1 0 0 -0.523595307179586
+          children [
+            Shape {
+              appearance USE frame
+              geometry Box {
+                size 0.04 0.8 0.08
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0.182 0.0312 0.34
+          rotation 0 1 0 0
+          children [
+            Shape {
+              appearance DEF separator_apperance PBRAppearance {
+                baseColor 1 1 0.498039
+                roughness 1
+                metalness 0
+              }
+              geometry Box {
+                size 0.08 0.016 0.016
+              }
+            }
+          ]
+        }
+        Transform {
+          translation -0.184 0.032 0.34
+          rotation 0 1 0 0
+          children [
+            Shape {
+              appearance DEF separator_apperance PBRAppearance {
+                baseColor 1 1 0.498039
+                roughness 1
+                metalness 0
+              }
+              geometry Box {
+                size 0.08 0.016 0.016
+              }
+            }
+          ]
+        }
+        Transform {
+          translation -0.382 -0.321916 0.278418
+          rotation 1 0 0 3.46682e-06
+          children [
+            Shape {
+              appearance USE frame
+              geometry Box {
+                size 0.08 0.15 0.08
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0.368 -0.321916 0.278418
+          rotation 1 0 0 3.46682e-06
+          children [
+            Shape {
+              appearance USE frame
+              geometry Box {
+                size 0.08 0.15 0.08
+              }
+            }
+          ]
+        }
+      ]
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        axis -1 0 0
+        anchor -0.386 0 0.248054
+      }
+      device [
+        RotationalMotor {
+          name "wheel1"
+          maxTorque 30
+        }
+      ]
+      endPoint Solid {
+        translation -0.375619 -0.0016252000000000597 0.250599
+        rotation -6.672896351300563e-16 -0.9999999999999999 4.1214948052150524e-16 1.570795307179584
+        children [
+          Shape {
+            appearance DEF wheel_appearance PBRAppearance {
+              baseColor 0 0 0
+              roughness 1
+              metalness 0
+            }
+            geometry DEF wheel_shape Cylinder {
+              height 0.08
+              radius 0.24
+            }
+          }
+        ]
+        name "wheel1"
+        contactMaterial "wheel"
+        boundingObject USE wheel_shape
+        physics DEF wheel_ph Physics {
+          density -1
+          mass 2
+        }
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        axis -1 0 0
+        anchor 0.376 0 0.248
+      }
+      device [
+        RotationalMotor {
+          name "wheel2"
+          maxTorque 30
+        }
+      ]
+      endPoint Solid {
+        translation 0.36474 -0.001373509999999985 0.251034
+        rotation 7.457942980865348e-16 -0.9999999999999999 5.887849721735802e-16 1.5707953071795793
+        children [
+          Shape {
+            appearance USE wheel_appearance
+            geometry USE wheel_shape
+          }
+        ]
+        name "wheel2"
+        contactMaterial "wheel"
+        boundingObject USE wheel_shape
+        physics USE wheel_ph
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        axis -1 0 0
+        anchor -0.376 -0.648 0.248
+      }
+      device [
+        RotationalMotor {
+          name "wheel3"
+          maxTorque 30
+        }
+      ]
+      endPoint Solid {
+        translation -0.379631 -0.647154 0.2594120000000001
+        rotation 2.94391795322982e-16 1 -1.570089575055904e-16 1.570799999999999
+        children [
+          Shape {
+            appearance USE wheel_appearance
+            geometry USE wheel_shape
+          }
+        ]
+        name "wheel3"
+        contactMaterial "wheel"
+        boundingObject USE wheel_shape
+        physics USE wheel_ph
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        axis -1 0 0
+        anchor 0.376 -0.648 0.247998
+      }
+      device [
+        RotationalMotor {
+          name "wheel4"
+          maxTorque 30
+        }
+      ]
+      endPoint Solid {
+        translation 0.370698 -0.648404 0.22983100000000023
+        rotation 7.850466295647724e-17 -0.9999999999999999 -1.5700932591295448e-16 1.5707953071795828
+        children [
+          Shape {
+            appearance USE wheel_appearance
+            geometry USE wheel_shape
+          }
+        ]
+        name "wheel4"
+        contactMaterial "wheel"
+        boundingObject USE wheel_shape
+        physics DEF wheel_ph Physics {
+          density -1
+          mass 1
+        }
+      }
+    }
+    Transform {
+      translation 0.224 0 0.284
+      rotation 0 1 0 0
+      children [
+        Shape {
+          appearance USE frame
+          geometry Box {
+            size 0.136 0.096 0.096
+          }
+        }
+      ]
+    }
+    Transform {
+      translation -0.224 0 0.284
+      rotation 0 1 0 0
+      children [
+        Shape {
+          appearance USE frame
+          geometry Box {
+            size 0.136 0.096 0.096
+          }
+        }
+      ]
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        axis -1 0 0
+        anchor -0.8 0 0.29
+      }
+      device [
+        RotationalMotor {
+          name "disks"
+          maxTorque 30
+        }
+      ]
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        axis -1 0 0
+        anchor 0 0.53 0.25
+      }
+      device [
+        DEF containerSensor PositionSensor {
+          name "containerSensor"
+        }
+        RotationalMotor {
+          name "container"
+        }
+      ]
+      endPoint DEF container Solid {
+        translation -0.006005849141114119 0.5097368950686891 0.2003189069685533
+        rotation -0.999999992332922 -0.00012367341383537757 -6.2484084526113595e-06 0.017785050299892684
+        children [
+          DEF container Group {
+            children [
+              Transform {
+                translation 0.28 1.40785e-07 0.1
+                rotation 1 0 0 4.692820414042842e-06
+                children [
+                  DEF container_side Shape {
+                    appearance DEF container_apperarance PBRAppearance {
+                      baseColor 1 0.666667 0.498039
+                      roughness 1
+                      metalness 0
+                    }
+                    geometry Box {
+                      size 0.016 0.4 0.2
+                    }
+                  }
+                ]
+              }
+              Transform {
+                translation -0.27 0 0.1
+                rotation 0 1 0 0
+                children [
+                  USE container_side
+                ]
+              }
+              Transform {
+                translation 0 -0.2 0.03
+                children [
+                  Shape {
+                    appearance USE container_apperarance
+                    geometry Box {
+                      size 0.56 0.0016 0.072
+                    }
+                  }
+                ]
+              }
+              Transform {
+                translation 0 0.19 0.1
+                children [
+                  Shape {
+                    appearance USE container_apperarance
+                    geometry Box {
+                      size 0.56 0.016 0.2
+                    }
+                  }
+                ]
+              }
+              Shape {
+                appearance USE container_apperarance
+                geometry Box {
+                  size 0.56 0.4 0.016
+                }
+              }
+            ]
+          }
+          DEF container_bottom_sensor TouchSensor {
+            translation 0 0 0.01
+            children [
+              DEF container_bottom Shape {
+                appearance USE container_apperarance
+                geometry Box {
+                  size 0.51 0.33 0.001
+                }
+              }
+            ]
+            name "container_bottom_sensor"
+            boundingObject USE container_bottom
+          }
+        ]
+        name "solid(5)"
+        boundingObject USE container
+        physics Physics {
+          density -1
+          mass 1
+        }
+        recognitionColors [
+          1 0 0
+        ]
+      }
+    }
+    Solid {
+      translation 0 -0.631409 0.927549
+      rotation 1 0 0 -0.523595307179586
+      children [
+        Transform {
+          translation 0 0 -0.17
+          children [
+            Shape {
+              appearance PBRAppearance {
+                baseColor 0.239216 0.239216 0.239216
+                roughness 1
+                metalness 0
+              }
+              geometry Capsule {
+                height 0.46
+                radius 0.05
+              }
+            }
+          ]
+        }
+        Camera {
+          translation 5.18889e-08 0.07 0.05
+          rotation -3.69431e-07 -3.88407e-07 -1 -1.5708053071795867
+          children [
+            Shape {
+              appearance PBRAppearance {
+                baseColor 0.666667 0 0
+              }
+              geometry Sphere {
+                radius 0.03
+                subdivision 2
+              }
+            }
+            Transform {
+              translation -0.02 0 7.34639e-08
+              rotation 0 1 0 1.5708
+              children [
+                Shape {
+                  appearance PBRAppearance {
+                    baseColor 0 0 0
+                    roughness 1
+                    metalness 0
+                  }
+                  geometry Cylinder {
+                    height 0.05
+                    radius 0.05
+                  }
+                }
+              ]
+            }
+          ]
+          name "CAM"
+          fieldOfView 1
+          width 640
+          height 640
+          recognition DEF recog Recognition {
+            maxRange 10
+            maxObjects 9
+            frameThickness 3
+          }
+        }
+      ]
+      name "cam"
+    }
+    Solid {
+      translation 0.01 -0.0682711 0.285036
+      rotation 1 0 0 -0.2618053071795865
+      children [
+        DEF separator Group {
+          children [
+            Transform {
+              translation -0.198 0.215389 0.0950767
+              rotation -1 0 0 0.26179530717958593
+              children [
+                Shape {
+                  appearance DEF separator_apperance PBRAppearance {
+                    baseColor 1 1 0.498039
+                    roughness 1
+                    metalness 0
+                  }
+                  geometry DEF separator_stick Box {
+                    size 0.016 0.256 0.016
+                  }
+                }
+              ]
+            }
+            Transform {
+              translation -0.08 0.215389 0.0950766
+              rotation -1 0 0 0.26179530717958593
+              children [
+                Shape {
+                  appearance USE separator_apperance
+                  geometry USE separator_stick
+                }
+              ]
+            }
+            Transform {
+              translation -0.11 0.215389 0.0950766
+              rotation -1 0 0 0.26179530717958593
+              children [
+                Shape {
+                  appearance USE separator_apperance
+                  geometry USE separator_stick
+                }
+              ]
+            }
+            Transform {
+              translation -0.18 0.215389 0.0950766
+              rotation -1 0 0 0.26179530717958593
+              children [
+                Shape {
+                  appearance USE separator_apperance
+                  geometry USE separator_stick
+                }
+              ]
+            }
+            Transform {
+              translation 0.1 0.215389 0.0950766
+              rotation -1 0 0 0.26179530717958593
+              children [
+                Shape {
+                  appearance USE separator_apperance
+                  geometry USE separator_stick
+                }
+              ]
+            }
+            Transform {
+              translation 0.2 0.215389 0.0950766
+              rotation -1 0 0 0.26179530717958593
+              children [
+                Shape {
+                  appearance USE separator_apperance
+                  geometry USE separator_stick
+                }
+              ]
+            }
+            Transform {
+              translation 0.17 0.215389 0.0950767
+              rotation -1 0 0 0.26179530717958593
+              children [
+                Shape {
+                  appearance USE separator_apperance
+                  geometry USE separator_stick
+                }
+              ]
+            }
+            Transform {
+              translation 0 0.34 0.07
+              rotation 0 1 0 0
+              children [
+                Shape {
+                  appearance DEF separator_apperance PBRAppearance {
+                    baseColor 1 1 0.498039
+                    roughness 1
+                    metalness 0
+                  }
+                  geometry Box {
+                    size 0.58 0.016 0.016
+                  }
+                }
+              ]
+            }
+            Transform {
+              translation -0.015 0.211673 0.0961306
+              rotation 1 0 0 -0.261795307179586
+              children [
+                Shape {
+                  appearance USE separator_apperance
+                  geometry USE separator_stick
+                }
+              ]
+            }
+            Transform {
+              translation 0.01 0.214389 0.0950767
+              rotation -1 0 0 0.26179530717958593
+              children [
+                Shape {
+                  appearance USE separator_apperance
+                  geometry USE separator_stick
+                }
+              ]
+            }
+            Transform {
+              translation 0.074 0.211675 0.0961257
+              rotation -1 0 0 0.26179530717958593
+              children [
+                Shape {
+                  appearance USE separator_apperance
+                  geometry USE separator_stick
+                }
+              ]
+            }
+          ]
+        }
+      ]
+      name "separator(1)"
+      contactMaterial "separator"
+      boundingObject USE separator
+      physics Physics {
+        density -1
+        mass 1
+        centerOfMass [
+          0 0 0
+        ]
+      }
+    }
+    Solid {
+      translation 0.00380659 0.688254 0.33
+      rotation 0 0 1 -1.5707953071795862
+      children [
+        DEF guide Shape {
+          appearance USE frame
+          geometry Box {
+            size 0.05 0.78 0.23
+          }
+        }
+      ]
+      name "solid(10)"
+      contactMaterial "guide"
+      boundingObject USE guide
+      physics DEF guide_phys Physics {
+        density -1
+        mass 0.5
+      }
+    }
+    Solid {
+      translation 0.322003 0.350059 0.11
+      rotation 0 0 1 -0.785395307179586
+      children [
+        DEF guide Shape {
+          appearance USE frame
+          geometry Box {
+            size 0.01 0.35 0.11
+          }
+        }
+      ]
+      contactMaterial "guide"
+      boundingObject USE guide
+      physics DEF guide_phys Physics {
+        density -1
+        mass 0.5
+      }
+    }
+    Solid {
+      translation -0.33012 0.333845 0.11
+      rotation 0 0 1 0.7854009999999998
+      children [
+        USE guide
+      ]
+      name "solid(1)"
+      contactMaterial "guide"
+      boundingObject USE guide
+      physics USE guide_phys
+    }
+    Solid {
+      translation -0.213742 0.0897194 0.11
+      rotation 0 0 1 0.261805
+      children [
+        USE guide
+      ]
+      name "solid(2)"
+      contactMaterial "guide"
+      boundingObject USE guide
+      physics USE guide_phys
+    }
+    Solid {
+      translation -0.184765 -0.142516 0.16
+      rotation 0 0 1 0.261805
+      children [
+        USE guide
+      ]
+      name "solid(4)"
+      contactMaterial "guide"
+      boundingObject USE guide
+      physics USE guide_phys
+    }
+    Solid {
+      translation 0.00523484 -0.264289 0.0871488
+      rotation 0.35740612701840735 0.3574071270187627 -0.8628563066501258 1.71777
+      children [
+        USE guide
+      ]
+      name "solid(7)"
+      contactMaterial "guide"
+      boundingObject USE guide
+      physics USE guide_phys
+    }
+    Solid {
+      translation 0.00523489 -0.314289 0.0871488
+      rotation 3.69431e-07 2.18975e-07 1 -1.5707953071795862
+      children [
+        USE guide
+      ]
+      name "solid(9)"
+      contactMaterial "guide"
+      boundingObject USE guide
+      physics USE guide_phys
+    }
+    Solid {
+      translation 0.00523499 -0.30636 0.198982
+      rotation 7.80236e-07 7.06662e-07 1 -1.5707953071795862
+      children [
+        USE guide
+      ]
+      name "solid(8)"
+      contactMaterial "guide"
+      boundingObject USE guide
+      physics USE guide_phys
+    }
+    Solid {
+      translation 0.195235 -0.142516 0.17
+      rotation 0 0 -1 0.261796
+      children [
+        USE guide
+      ]
+      name "solid(6)"
+      contactMaterial "guide"
+      boundingObject USE guide
+      physics USE guide_phys
+    }
+    Solid {
+      translation 0.214553 0.0923114 0.11
+      rotation 0 0 1 -0.261795307179586
+      children [
+        USE guide
+      ]
+      name "solid(3)"
+      contactMaterial "guide"
+      boundingObject USE guide
+      physics USE guide_phys
+    }
+    DEF body_bumper_sensor TouchSensor {
+      translation 0 -1 0.26
+      children [
+        DEF body_bumpers Group {
+          children [
+            Shape {
+              appearance PBRAppearance {
+                baseColor 0 0.666667 0.498039
+                roughness 1
+                metalness 0
+              }
+              geometry DEF back Box {
+                size 0.82 0.04 0.14
+              }
+            }
+            Transform {
+              translation -0.37 0.056 0
+              rotation 0 1 0 0
+              children [
+                Shape {
+                  appearance PBRAppearance {
+                    baseColor 0 0.666667 0.498039
+                    roughness 1
+                    metalness 0
+                  }
+                  geometry DEF back Box {
+                    size 0.08 0.07 0.14
+                  }
+                }
+              ]
+            }
+            Transform {
+              translation 0.37 0.056 0
+              rotation 0 1 0 0
+              children [
+                Shape {
+                  appearance PBRAppearance {
+                    baseColor 0 0.666667 0.498039
+                    roughness 1
+                    metalness 0
+                  }
+                  geometry DEF back Box {
+                    size 0.08 0.07 0.14
+                  }
+                }
+              ]
+            }
+            Transform {
+              translation -0.385 1.543 -0.0168
+              rotation 0 1 0 0
+              children [
+                Shape {
+                  appearance USE frame
+                  geometry DEF back Box {
+                    size 0.105 0.35 0.029
+                  }
+                }
+              ]
+            }
+            Transform {
+              translation 0.375 1.543 -0.0168
+              rotation 0 1 0 0
+              children [
+                Shape {
+                  appearance USE frame
+                  geometry DEF back Box {
+                    size 0.105 0.35 0.029
+                  }
+                }
+              ]
+            }
+            Transform {
+              translation 0.418 0.682 -0.0168
+              rotation 0 1 0 0
+              children [
+                Shape {
+                  appearance USE frame
+                  geometry DEF back Box {
+                    size 0.001 1.36 0.03
+                  }
+                }
+              ]
+            }
+            Transform {
+              translation -0.432 0.682 -0.0168
+              rotation 0 1 0 0
+              children [
+                Shape {
+                  appearance USE frame
+                  geometry DEF back Box {
+                    size 0.001 1.36 0.03
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+      name "body_bumper_sensor"
+      boundingObject USE body_bumpers
+      physics Physics {
+        density -1
+        mass 1
+      }
+    }
+    DEF gps GPS {
+      translation 0 -0.59 0
+    }
+    DEF gps2 GPS {
+      translation 0 -0.2 0.16
+      name "gps2"
+    }
+    DEF lidar Lidar {
+      translation 7.34642e-08 -0.43 0.66
+      rotation 0 0 1 1.5708
+      horizontalResolution 12
+      fieldOfView 0.8
+      verticalFieldOfView 0.1
+      numberOfLayers 1
+      maxRange 3
+    }
+    DEF lidar2 Lidar {
+      translation 2.06013e-07 -0.56 0.66
+      rotation 0 0 1 -1.5707953071795862
+      name "lidar2"
+      horizontalResolution 36
+      fieldOfView 5.5
+      verticalFieldOfView 0.1
+      numberOfLayers 1
+      maxRange 3
+    }
+  ]
+  name "cacaobot"
+  boundingObject USE Body
+  physics Physics {
+    density -1
+    mass 30
+    centerOfMass [
+      0 -0.0125 0
+    ]
+  }
+  controller "no_disk2"
+  supervisor TRUE
+}
+DEF collection_area Solid {
+  translation 1.29 4.49 -0.04
+  children [
+    Shape {
+      geometry DEF gatherarea Box {
+        size 2 2 0.081
+      }
+    }
+  ]
+  name "collection_area"
+  model "collection_area"
+  contactMaterial "collection"
+  recognitionColors [
+    0 0 1
+  ]
+}
+DEF cacao0 Solid {
+  translation -0.38624 2.68391 0.0583633
+  rotation 0.9986786733326688 -0.04963868376320955 -0.013300695649348618 1.58053
+  scale 1.1 1.1 1.1
+  children [
+    DEF ugly_cacao Group {
+      children [
+        Transform {
+          translation -0.02 0 0
+          children [
+            Shape {
+              appearance DEF cacao1 PBRAppearance {
+                baseColor 1 0.333333 0
+                metalness 0
+              }
+              geometry Cylinder {
+                height 0.15
+                radius 0.03
+              }
+            }
+          ]
+        }
+        Transform {
+          translation -0.01 0.02 0
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Cylinder {
+                height 0.15
+                radius 0.03
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0.01 0.02 0
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Cylinder {
+                height 0.15
+                radius 0.03
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0.02 0 0
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Cylinder {
+                height 0.15
+                radius 0.03
+              }
+            }
+          ]
+        }
+        Transform {
+          translation -0.01 -0.02 0
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Cylinder {
+                height 0.15
+                radius 0.03
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0.01 -0.02 0
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Cylinder {
+                height 0.15
+                radius 0.03
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0 0 0.06
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Sphere {
+                radius 0.05215
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0 6.10065e-07 -0.06
+          rotation 1 0 0 4.692820414042842e-06
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Sphere {
+                radius 0.05215
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0 7.03921e-07 -0.08
+          rotation 1 0 0 4.692820414042842e-06
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Sphere {
+                radius 0.045
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0 7.97777e-07 -0.1
+          rotation 1 0 0 4.692820414042842e-06
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Sphere {
+                radius 0.03
+              }
+            }
+          ]
+        }
+        Shape {
+          appearance USE cacao1
+          geometry Capsule {
+            height 0.16
+            radius 0.04
+          }
+        }
+      ]
+    }
+  ]
+  name "cacao0"
+  model "cacao"
+  contactMaterial "cacao"
+  boundingObject USE ugly_cacao
+  recognitionColors [
+    1 0 0
+  ]
+}
+DEF cacao2 Solid {
+  translation 0.0756177 -0.258429 0.192803
+  rotation 0.7040541500256862 -0.09269071975130581 -0.7040711500293086 -2.9567353071795863
+  children [
+    DEF ugly_cacao Group {
+      children [
+        Transform {
+          translation -0.02 0 0
+          children [
+            Shape {
+              appearance DEF cacao1 PBRAppearance {
+                baseColor 1 0.333333 0
+                metalness 0
+              }
+              geometry Cylinder {
+                height 0.15
+                radius 0.03
+              }
+            }
+          ]
+        }
+        Transform {
+          translation -0.01 0.02 0
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Cylinder {
+                height 0.15
+                radius 0.03
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0.01 0.02 0
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Cylinder {
+                height 0.15
+                radius 0.03
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0.02 0 0
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Cylinder {
+                height 0.15
+                radius 0.03
+              }
+            }
+          ]
+        }
+        Transform {
+          translation -0.01 -0.02 0
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Cylinder {
+                height 0.15
+                radius 0.03
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0.01 -0.02 0
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Cylinder {
+                height 0.15
+                radius 0.03
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0 0 0.06
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Sphere {
+                radius 0.05215
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0 6.10065e-07 -0.06
+          rotation 1 0 0 4.692820414042842e-06
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Sphere {
+                radius 0.05215
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0 7.03921e-07 -0.08
+          rotation 1 0 0 4.692820414042842e-06
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Sphere {
+                radius 0.045
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0 7.97777e-07 -0.1
+          rotation 1 0 0 4.692820414042842e-06
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Sphere {
+                radius 0.03
+              }
+            }
+          ]
+        }
+        Shape {
+          appearance USE cacao1
+          geometry Capsule {
+            height 0.16
+            radius 0.04
+          }
+        }
+      ]
+    }
+  ]
+  name "cacao2"
+  model "cacao"
+  contactMaterial "cacao"
+  boundingObject USE ugly_cacao
+  recognitionColors [
+    1 0 0
+  ]
+}
+DEF cacao3 Solid {
+  translation 1.1087 3.96834 0.0527574
+  rotation 0.7070992811436049 7.252082883437699e-07 -0.7071142811495689 -3.1415853071795863
+  scale 1.1 1.1 1.1
+  children [
+    DEF ugly_cacao Group {
+      children [
+        Transform {
+          translation -0.02 0 0
+          children [
+            Shape {
+              appearance DEF cacao1 PBRAppearance {
+                baseColor 1 0.333333 0
+                metalness 0
+              }
+              geometry Cylinder {
+                height 0.15
+                radius 0.03
+              }
+            }
+          ]
+        }
+        Transform {
+          translation -0.01 0.02 0
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Cylinder {
+                height 0.15
+                radius 0.03
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0.01 0.02 0
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Cylinder {
+                height 0.15
+                radius 0.03
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0.02 0 0
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Cylinder {
+                height 0.15
+                radius 0.03
+              }
+            }
+          ]
+        }
+        Transform {
+          translation -0.01 -0.02 0
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Cylinder {
+                height 0.15
+                radius 0.03
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0.01 -0.02 0
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Cylinder {
+                height 0.15
+                radius 0.03
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0 0 0.06
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Sphere {
+                radius 0.05215
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0 6.10065e-07 -0.06
+          rotation 1 0 0 4.692820414042842e-06
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Sphere {
+                radius 0.05215
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0 7.03921e-07 -0.08
+          rotation 1 0 0 4.692820414042842e-06
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Sphere {
+                radius 0.045
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0 7.97777e-07 -0.1
+          rotation 1 0 0 4.692820414042842e-06
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Sphere {
+                radius 0.03
+              }
+            }
+          ]
+        }
+        Shape {
+          appearance USE cacao1
+          geometry Capsule {
+            height 0.16
+            radius 0.04
+          }
+        }
+      ]
+    }
+  ]
+  name "cacao3"
+  model "cacao"
+  contactMaterial "cacao"
+  boundingObject USE ugly_cacao
+  recognitionColors [
+    1 0 0
+  ]
+}
+DEF cacao4 Solid {
+  translation -1.1588 2.59539 0.0528111
+  rotation 0.5773459358484986 0.5773529358477207 -0.5773519358478318 2.09442
+  scale 0.9 0.9 0.9
+  children [
+    DEF ugly_cacao Group {
+      children [
+        Transform {
+          translation -0.02 0 0
+          children [
+            Shape {
+              appearance DEF cacao1 PBRAppearance {
+                baseColor 1 0.333333 0
+                metalness 0
+              }
+              geometry Cylinder {
+                height 0.15
+                radius 0.03
+              }
+            }
+          ]
+        }
+        Transform {
+          translation -0.01 0.02 0
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Cylinder {
+                height 0.15
+                radius 0.03
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0.01 0.02 0
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Cylinder {
+                height 0.15
+                radius 0.03
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0.02 0 0
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Cylinder {
+                height 0.15
+                radius 0.03
+              }
+            }
+          ]
+        }
+        Transform {
+          translation -0.01 -0.02 0
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Cylinder {
+                height 0.15
+                radius 0.03
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0.01 -0.02 0
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Cylinder {
+                height 0.15
+                radius 0.03
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0 0 0.06
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Sphere {
+                radius 0.05215
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0 6.10065e-07 -0.06
+          rotation 1 0 0 4.692820414042842e-06
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Sphere {
+                radius 0.05215
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0 7.03921e-07 -0.08
+          rotation 1 0 0 4.692820414042842e-06
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Sphere {
+                radius 0.045
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0 7.97777e-07 -0.1
+          rotation 1 0 0 4.692820414042842e-06
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Sphere {
+                radius 0.03
+              }
+            }
+          ]
+        }
+        Shape {
+          appearance USE cacao1
+          geometry Capsule {
+            height 0.16
+            radius 0.04
+          }
+        }
+      ]
+    }
+  ]
+  name "cacao4"
+  model "cacao"
+  contactMaterial "cacao"
+  boundingObject USE ugly_cacao
+  recognitionColors [
+    1 0 0
+  ]
+}
+DEF cacao5 Solid {
+  translation -1.7088 2.66538 0.0528095
+  rotation 0.5773459358484986 0.5773529358477207 -0.5773519358478318 2.09442
+  scale 0.9 0.9 0.9
+  children [
+    DEF ugly_cacao Group {
+      children [
+        Transform {
+          translation -0.02 0 0
+          children [
+            Shape {
+              appearance DEF cacao1 PBRAppearance {
+                baseColor 1 0.333333 0
+                metalness 0
+              }
+              geometry Cylinder {
+                height 0.15
+                radius 0.03
+              }
+            }
+          ]
+        }
+        Transform {
+          translation -0.01 0.02 0
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Cylinder {
+                height 0.15
+                radius 0.03
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0.01 0.02 0
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Cylinder {
+                height 0.15
+                radius 0.03
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0.02 0 0
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Cylinder {
+                height 0.15
+                radius 0.03
+              }
+            }
+          ]
+        }
+        Transform {
+          translation -0.01 -0.02 0
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Cylinder {
+                height 0.15
+                radius 0.03
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0.01 -0.02 0
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Cylinder {
+                height 0.15
+                radius 0.03
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0 0 0.06
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Sphere {
+                radius 0.05215
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0 6.10065e-07 -0.06
+          rotation 1 0 0 4.692820414042842e-06
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Sphere {
+                radius 0.05215
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0 7.03921e-07 -0.08
+          rotation 1 0 0 4.692820414042842e-06
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Sphere {
+                radius 0.045
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0 7.97777e-07 -0.1
+          rotation 1 0 0 4.692820414042842e-06
+          children [
+            Shape {
+              appearance USE cacao1
+              geometry Sphere {
+                radius 0.03
+              }
+            }
+          ]
+        }
+        Shape {
+          appearance USE cacao1
+          geometry Capsule {
+            height 0.16
+            radius 0.04
+          }
+        }
+      ]
+    }
+  ]
+  name "cacao5"
+  model "cacao"
+  contactMaterial "cacao"
+  boundingObject USE ugly_cacao
+  recognitionColors [
+    1 0 0
+  ]
+}
+Solid {
+  translation -4.05 1.45 1.81
+  rotation 0 0 1 1.57079
+  children [
+    DEF tree Shape {
+      appearance DEF tree_appearance PBRAppearance {
+        baseColor 0.356863 0.180392 0
+        metalness 0
+      }
+      geometry Cylinder {
+        height 4
+        radius 0.1
+      }
+    }
+    Transform {
+      translation 0.36 0 0
+      rotation 0 1 0 0.785398
+      children [
+        DEF branch Shape {
+          appearance USE tree_appearance
+          geometry Cylinder {
+            height 1
+            radius 0.075
+          }
+        }
+      ]
+    }
+    Transform {
+      translation -0.371858 0.113881 0.731852
+      rotation 0.0539871970128658 0.9899989452229441 -0.13033599278845498 2.36327
+      children [
+        DEF branch Shape {
+          appearance USE tree_appearance
+          geometry Cylinder {
+            height 1
+            radius 0.075
+          }
+        }
+      ]
+    }
+    Transform {
+      translation -0.400264 -0.135554 -0.356951
+      rotation 0.05398759584698384 -0.9899989238439595 -0.13033598997385484 -2.3632653071795864
+      children [
+        DEF branch Shape {
+          appearance USE tree_appearance
+          geometry Cylinder {
+            height 1
+            radius 0.075
+          }
+        }
+      ]
+    }
+  ]
+  name "solid(5)"
+  boundingObject USE tree
+}
+Solid {
+  translation -4.05 -0.79 1.95
+  rotation 0 0 1 2.61799
+  children [
+    DEF tree Shape {
+      appearance DEF tree_appearance PBRAppearance {
+        baseColor 0.356863 0.180392 0
+        metalness 0
+      }
+      geometry Cylinder {
+        height 4
+        radius 0.1
+      }
+    }
+    Transform {
+      translation 0.36 0 0
+      rotation 0 1 0 0.785398
+      children [
+        DEF branch Shape {
+          appearance USE tree_appearance
+          geometry Cylinder {
+            height 1
+            radius 0.075
+          }
+        }
+      ]
+    }
+    Transform {
+      translation -0.371858 0.113881 0.731852
+      rotation 0.0539871970128658 0.9899989452229441 -0.13033599278845498 2.36327
+      children [
+        DEF branch Shape {
+          appearance USE tree_appearance
+          geometry Cylinder {
+            height 1
+            radius 0.075
+          }
+        }
+      ]
+    }
+    Transform {
+      translation -0.400264 -0.135554 -0.356951
+      rotation 0.05398759584698384 -0.9899989238439595 -0.13033598997385484 -2.3632653071795864
+      children [
+        DEF branch Shape {
+          appearance USE tree_appearance
+          geometry Cylinder {
+            height 1
+            radius 0.075
+          }
+        }
+      ]
+    }
+  ]
+  name "solid(6)"
+  boundingObject USE tree
+}
+Solid {
+  translation -1.89 1.45 1.81
+  rotation 0 0 -1 -1.3089953071795861
+  children [
+    DEF tree Shape {
+      appearance DEF tree_appearance PBRAppearance {
+        baseColor 0.356863 0.180392 0
+        metalness 0
+      }
+      geometry Cylinder {
+        height 4
+        radius 0.1
+      }
+    }
+    Transform {
+      translation 0.36 0 0
+      rotation 0 1 0 0.785398
+      children [
+        DEF branch Shape {
+          appearance USE tree_appearance
+          geometry Cylinder {
+            height 1
+            radius 0.075
+          }
+        }
+      ]
+    }
+    Transform {
+      translation -0.371858 0.113881 0.731852
+      rotation 0.0539871970128658 0.9899989452229441 -0.13033599278845498 2.36327
+      children [
+        DEF branch Shape {
+          appearance USE tree_appearance
+          geometry Cylinder {
+            height 1
+            radius 0.075
+          }
+        }
+      ]
+    }
+    Transform {
+      translation -0.400264 -0.135554 -0.356951
+      rotation 0.05398759584698384 -0.9899989238439595 -0.13033598997385484 -2.3632653071795864
+      children [
+        DEF branch Shape {
+          appearance USE tree_appearance
+          geometry Cylinder {
+            height 1
+            radius 0.075
+          }
+        }
+      ]
+    }
+  ]
+  name "solid(1)"
+  boundingObject USE tree
+}
+Solid {
+  translation -1.89 -0.97 1.96
+  rotation 0 0 1 2.35619
+  children [
+    DEF tree Shape {
+      appearance DEF tree_appearance PBRAppearance {
+        baseColor 0.356863 0.180392 0
+        metalness 0
+      }
+      geometry Cylinder {
+        height 4
+        radius 0.1
+      }
+    }
+    Transform {
+      translation 0.36 0 0
+      rotation 0 1 0 0.785398
+      children [
+        DEF branch Shape {
+          appearance USE tree_appearance
+          geometry Cylinder {
+            height 1
+            radius 0.075
+          }
+        }
+      ]
+    }
+    Transform {
+      translation -0.371858 0.113881 0.731852
+      rotation 0.0539871970128658 0.9899989452229441 -0.13033599278845498 2.36327
+      children [
+        DEF branch Shape {
+          appearance USE tree_appearance
+          geometry Cylinder {
+            height 1
+            radius 0.075
+          }
+        }
+      ]
+    }
+    Transform {
+      translation -0.400264 -0.135554 -0.356951
+      rotation 0.05398759584698384 -0.9899989238439595 -0.13033598997385484 -2.3632653071795864
+      children [
+        DEF branch Shape {
+          appearance USE tree_appearance
+          geometry Cylinder {
+            height 1
+            radius 0.075
+          }
+        }
+      ]
+    }
+  ]
+  name "solid(7)"
+  boundingObject USE tree
+}
+Solid {
+  translation 0.21 1.45 1.81
+  rotation 0 0 1 2.61799
+  children [
+    DEF tree Shape {
+      appearance DEF tree_appearance PBRAppearance {
+        baseColor 0.356863 0.180392 0
+        metalness 0
+      }
+      geometry Cylinder {
+        height 4
+        radius 0.1
+      }
+    }
+    Transform {
+      translation 0.36 0 0
+      rotation 0 1 0 0.785398
+      children [
+        DEF branch Shape {
+          appearance USE tree_appearance
+          geometry Cylinder {
+            height 1
+            radius 0.075
+          }
+        }
+      ]
+    }
+    Transform {
+      translation -0.371858 0.113881 0.731852
+      rotation 0.0539871970128658 0.9899989452229441 -0.13033599278845498 2.36327
+      children [
+        DEF branch Shape {
+          appearance USE tree_appearance
+          geometry Cylinder {
+            height 1
+            radius 0.075
+          }
+        }
+      ]
+    }
+    Transform {
+      translation -0.400264 -0.135554 -0.356951
+      rotation 0.05398759584698384 -0.9899989238439595 -0.13033598997385484 -2.3632653071795864
+      children [
+        DEF branch Shape {
+          appearance USE tree_appearance
+          geometry Cylinder {
+            height 1
+            radius 0.075
+          }
+        }
+      ]
+    }
+  ]
+  name "solid(2)"
+  boundingObject USE tree
+}
+Solid {
+  translation 0.209988 -0.72 2.03
+  rotation 0 0 1 1.57079
+  children [
+    DEF tree Shape {
+      appearance DEF tree_appearance PBRAppearance {
+        baseColor 0.356863 0.180392 0
+        metalness 0
+      }
+      geometry Cylinder {
+        height 4
+        radius 0.1
+      }
+    }
+    Transform {
+      translation 0.36 0 0
+      rotation 0 1 0 0.785398
+      children [
+        DEF branch Shape {
+          appearance USE tree_appearance
+          geometry Cylinder {
+            height 1
+            radius 0.075
+          }
+        }
+      ]
+    }
+    Transform {
+      translation -0.371858 0.113881 0.731852
+      rotation 0.0539871970128658 0.9899989452229441 -0.13033599278845498 2.36327
+      children [
+        DEF branch Shape {
+          appearance USE tree_appearance
+          geometry Cylinder {
+            height 1
+            radius 0.075
+          }
+        }
+      ]
+    }
+    Transform {
+      translation -0.400264 -0.135554 -0.356951
+      rotation 0.05398759584698384 -0.9899989238439595 -0.13033598997385484 -2.3632653071795864
+      children [
+        DEF branch Shape {
+          appearance USE tree_appearance
+          geometry Cylinder {
+            height 1
+            radius 0.075
+          }
+        }
+      ]
+    }
+  ]
+  name "solid(8)"
+  boundingObject USE tree
+}
+Solid {
+  translation 2.36 1.45 1.81
+  rotation 0 0 1 3.14159
+  children [
+    DEF tree Shape {
+      appearance DEF tree_appearance PBRAppearance {
+        baseColor 0.356863 0.180392 0
+        metalness 0
+      }
+      geometry Cylinder {
+        height 4
+        radius 0.1
+      }
+    }
+    Transform {
+      translation 0.36 0 0
+      rotation 0 1 0 0.785398
+      children [
+        DEF branch Shape {
+          appearance USE tree_appearance
+          geometry Cylinder {
+            height 1
+            radius 0.075
+          }
+        }
+      ]
+    }
+    Transform {
+      translation -0.371858 0.113881 0.731852
+      rotation 0.0539871970128658 0.9899989452229441 -0.13033599278845498 2.36327
+      children [
+        DEF branch Shape {
+          appearance USE tree_appearance
+          geometry Cylinder {
+            height 1
+            radius 0.075
+          }
+        }
+      ]
+    }
+    Transform {
+      translation -0.400264 -0.135554 -0.356951
+      rotation 0.05398759584698384 -0.9899989238439595 -0.13033598997385484 -2.3632653071795864
+      children [
+        DEF branch Shape {
+          appearance USE tree_appearance
+          geometry Cylinder {
+            height 1
+            radius 0.075
+          }
+        }
+      ]
+    }
+  ]
+  name "solid(3)"
+  boundingObject USE tree
+}
+Solid {
+  translation 2.36 -0.57 2.01
+  rotation 0 0 1 1.57079
+  children [
+    DEF tree Shape {
+      appearance DEF tree_appearance PBRAppearance {
+        baseColor 0.356863 0.180392 0
+        metalness 0
+      }
+      geometry Cylinder {
+        height 4
+        radius 0.1
+      }
+    }
+    Transform {
+      translation 0.36 0 0
+      rotation 0 1 0 0.785398
+      children [
+        DEF branch Shape {
+          appearance USE tree_appearance
+          geometry Cylinder {
+            height 1
+            radius 0.075
+          }
+        }
+      ]
+    }
+    Transform {
+      translation -0.371858 0.113881 0.731852
+      rotation 0.0539871970128658 0.9899989452229441 -0.13033599278845498 2.36327
+      children [
+        DEF branch Shape {
+          appearance USE tree_appearance
+          geometry Cylinder {
+            height 1
+            radius 0.075
+          }
+        }
+      ]
+    }
+    Transform {
+      translation -0.400264 -0.135554 -0.356951
+      rotation 0.05398759584698384 -0.9899989238439595 -0.13033598997385484 -2.3632653071795864
+      children [
+        DEF branch Shape {
+          appearance USE tree_appearance
+          geometry Cylinder {
+            height 1
+            radius 0.075
+          }
+        }
+      ]
+    }
+  ]
+  name "solid(9)"
+  boundingObject USE tree
+}
+Solid {
+  translation 4.45 1.45 1.81
+  rotation 0 0 1 -2.8797953071795863
+  children [
+    DEF tree Shape {
+      appearance DEF tree_appearance PBRAppearance {
+        baseColor 0.356863 0.180392 0
+        metalness 0
+      }
+      geometry Cylinder {
+        height 4
+        radius 0.1
+      }
+    }
+    Transform {
+      translation 0.36 0 0
+      rotation 0 1 0 0.785398
+      children [
+        DEF branch Shape {
+          appearance USE tree_appearance
+          geometry Cylinder {
+            height 1
+            radius 0.075
+          }
+        }
+      ]
+    }
+    Transform {
+      translation -0.371858 0.113881 0.731852
+      rotation 0.0539871970128658 0.9899989452229441 -0.13033599278845498 2.36327
+      children [
+        DEF branch Shape {
+          appearance USE tree_appearance
+          geometry Cylinder {
+            height 1
+            radius 0.075
+          }
+        }
+      ]
+    }
+    Transform {
+      translation -0.400264 -0.135554 -0.356951
+      rotation 0.05398759584698384 -0.9899989238439595 -0.13033598997385484 -2.3632653071795864
+      children [
+        DEF branch Shape {
+          appearance USE tree_appearance
+          geometry Cylinder {
+            height 1
+            radius 0.075
+          }
+        }
+      ]
+    }
+  ]
+  name "solid(4)"
+  boundingObject USE tree
+}
+Solid {
+  translation 4.45 -0.77 1.81
+  rotation 0 0 1 -1.3090053071795866
+  children [
+    DEF tree Shape {
+      appearance DEF tree_appearance PBRAppearance {
+        baseColor 0.356863 0.180392 0
+        metalness 0
+      }
+      geometry Cylinder {
+        height 4
+        radius 0.1
+      }
+    }
+    Transform {
+      translation 0.36 0 0
+      rotation 0 1 0 0.785398
+      children [
+        DEF branch Shape {
+          appearance USE tree_appearance
+          geometry Cylinder {
+            height 1
+            radius 0.075
+          }
+        }
+      ]
+    }
+    Transform {
+      translation -0.371858 0.113881 0.731852
+      rotation 0.0539871970128658 0.9899989452229441 -0.13033599278845498 2.36327
+      children [
+        DEF branch Shape {
+          appearance USE tree_appearance
+          geometry Cylinder {
+            height 1
+            radius 0.075
+          }
+        }
+      ]
+    }
+    Transform {
+      translation -0.400264 -0.135554 -0.356951
+      rotation 0.05398759584698384 -0.9899989238439595 -0.13033598997385484 -2.3632653071795864
+      children [
+        DEF branch Shape {
+          appearance USE tree_appearance
+          geometry Cylinder {
+            height 1
+            radius 0.075
+          }
+        }
+      ]
+    }
+  ]
+  name "solid(10)"
+  boundingObject USE tree
+}
