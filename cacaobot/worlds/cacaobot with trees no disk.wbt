@@ -13,8 +13,8 @@ WorldInfo {
   ]
 }
 Viewpoint {
-  orientation -0.4476276169703051 0.46790744043298965 0.7620315897080213 1.7168316550878036
-  position 0.06543519151367949 -6.589922718315034 6.001546012639798
+  orientation -0.40642528790285637 0.6455772092784939 0.6465667422728082 1.4552828001932792
+  position -1.5467311478401364 -5.813770096339418 5.3150310659579
   follow "cacaobot"
   followType "None"
   bloomThreshold 2
@@ -177,8 +177,8 @@ DEF cacaobot Robot {
         }
       ]
       endPoint Solid {
-        translation -0.375619 -0.0016252000000000597 0.250599
-        rotation -6.672896351300563e-16 -0.9999999999999999 4.1214948052150524e-16 1.570795307179584
+        translation -0.375619 -0.00162520000000006 0.250599
+        rotation -7.850466295647718e-16 -0.9999999999999999 4.3177564626062446e-16 1.570795307179584
         children [
           Shape {
             appearance DEF wheel_appearance PBRAppearance {
@@ -213,8 +213,8 @@ DEF cacaobot Robot {
         }
       ]
       endPoint Solid {
-        translation 0.36474 -0.001373509999999985 0.251034
-        rotation 7.457942980865348e-16 -0.9999999999999999 5.887849721735802e-16 1.5707953071795793
+        translation 0.36474 -0.001373509999999982 0.251034
+        rotation 7.457942980865353e-16 -0.9999999999999999 5.887849721735804e-16 1.570795307179579
         children [
           Shape {
             appearance USE wheel_appearance
@@ -240,7 +240,7 @@ DEF cacaobot Robot {
       ]
       endPoint Solid {
         translation -0.379631 -0.647154 0.2594120000000001
-        rotation 2.94391795322982e-16 1 -1.570089575055904e-16 1.570799999999999
+        rotation 2.3551343625838557e-16 1 -1.9626119688198802e-16 1.570799999999999
         children [
           Shape {
             appearance USE wheel_appearance
@@ -265,8 +265,8 @@ DEF cacaobot Robot {
         }
       ]
       endPoint Solid {
-        translation 0.370698 -0.648404 0.22983100000000023
-        rotation 7.850466295647724e-17 -0.9999999999999999 -1.5700932591295448e-16 1.5707953071795828
+        translation 0.370698 -0.648404 0.22983100000000026
+        rotation 0 -0.9999999999999999 -7.850466295647724e-17 1.5707953071795828
         children [
           Shape {
             appearance USE wheel_appearance
@@ -332,8 +332,8 @@ DEF cacaobot Robot {
         }
       ]
       endPoint DEF container Solid {
-        translation -0.006005849141114119 0.5097368950686891 0.2003189069685533
-        rotation -0.999999992332922 -0.00012367341383537757 -6.2484084526113595e-06 0.017785050299892684
+        translation -0.0060058491411141175 0.5097368950686891 0.2003189069685533
+        rotation -0.999999992332922 -0.00012367341383537757 -6.248408452611358e-06 0.017785050299892684
         children [
           DEF container Group {
             children [
@@ -622,25 +622,6 @@ DEF cacaobot Robot {
       }
     }
     Solid {
-      translation 0.00380659 0.688254 0.33
-      rotation 0 0 1 -1.5707953071795862
-      children [
-        DEF guide Shape {
-          appearance USE frame
-          geometry Box {
-            size 0.05 0.78 0.23
-          }
-        }
-      ]
-      name "solid(10)"
-      contactMaterial "guide"
-      boundingObject USE guide
-      physics DEF guide_phys Physics {
-        density -1
-        mass 0.5
-      }
-    }
-    Solid {
       translation 0.322003 0.350059 0.11
       rotation 0 0 1 -0.785395307179586
       children [
@@ -854,10 +835,6 @@ DEF cacaobot Robot {
     DEF gps GPS {
       translation 0 -0.59 0
     }
-    DEF gps2 GPS {
-      translation 0 -0.2 0.16
-      name "gps2"
-    }
     DEF lidar Lidar {
       translation 7.34642e-08 -0.43 0.66
       rotation 0 0 1 1.5708
@@ -887,7 +864,7 @@ DEF cacaobot Robot {
       0 -0.0125 0
     ]
   }
-  controller "no_disk2"
+  controller "cacaobot"
   supervisor TRUE
 }
 DEF collection_area Solid {

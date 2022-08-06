@@ -50,8 +50,12 @@ class OpenAIGymEnvironment(Supervisor, gym.Env):
         self.__container_bottom = self.getDevice('container_bottom_sensor')
         self.__container_bottom.enable(self.__timestep)
 
-        # init robot parts
+        
+        #init disks
+        #for environments with disks
         #self.__disk = self.getDevice('disks')
+        
+        # init robot parts
         self.__containerSensor = self.getDevice('containerSensor')
         self.__container = self.getDevice('container')
         self.__containerSensor = self.getDevice('containerSensor')
@@ -60,8 +64,6 @@ class OpenAIGymEnvironment(Supervisor, gym.Env):
         # init GPS
         self.__gps = self.getDevice('gps')
         self.__gps.enable(self.__timestep)
-        self.__gps2 = self.getDevice('gps2')
-        self.__gps2.enable(self.__timestep)
 
         # int Lidar
         self.__lidar = self.getDevice('lidar')
@@ -251,7 +253,12 @@ class OpenAIGymEnvironment(Supervisor, gym.Env):
         self.reward = 0
         done = False
 
+        #for environments with disks
+        #self.__disk.setPosition(float('inf'))
+        #self.__disk.setVelocity(0.0)
+        
         # for no disk only
+        self.__container.setVelocity(1)
         self.__container.setPosition(0)
 
         if action == 0:
@@ -312,6 +319,14 @@ class OpenAIGymEnvironment(Supervisor, gym.Env):
         # Sets the speed
         self.setLeftSpeed()
         self.setRightSpeed()
+        
+        
+        if self.leftSpeed < self.rightSpeed:
+            diskSpeed = self.rightSpeed/1.5
+        else:
+            diskSpeed = self.leftSpeed/1.5
+    
+        self.__disk.setVelocity(diskSpeed)
 
         super().step(self.__timestep)
 
@@ -403,7 +418,7 @@ class OpenAIGymEnvironment(Supervisor, gym.Env):
                 elif obj.status == 2:  # cacao is inside the collecttion area
                     if not self.cacao_in_collection_area(cacao_position) and not self.cacao_in_container(cacao_position) and cacao_position[2] < 0.06:
                         # if cacao is on the ground
-                        self.reward -= 700
+                        self.reward -= 1100
                         self.__observed_objects[id].status = 0
                         self.__cacao_status[id] = 0
                     elif self.cacao_in_container(cacao_position):
@@ -425,7 +440,6 @@ class OpenAIGymEnvironment(Supervisor, gym.Env):
                         self.in_collision = 1
                         break
         else:
-            #self.reward -= 1
             if self.__body_bumper.getValue() == 0.0:
                 self.in_collision = 0
                 for val in range_image:

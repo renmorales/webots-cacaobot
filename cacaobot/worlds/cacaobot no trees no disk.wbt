@@ -46,8 +46,8 @@ WorldInfo {
   ]
 }
 Viewpoint {
-  orientation -0.23534317401299454 -0.390081940729408 0.8901964221239422 4.958424512882837
-  position -4.04860605173981 12.225811712842503 9.007861907897844
+  orientation 0.3334193587674799 -0.3914802151126423 -0.8576565585212077 4.828842788982665
+  position -6.878734794900783 -18.893183842528902 18.707893198878594
   follow "cacaobot"
   followType "None"
   bloomThreshold 10
@@ -59,17 +59,11 @@ TexturedBackgroundLight {
   castShadows FALSE
 }
 RectangleArena {
-  translation -0.53 2.76 0
   rotation 0 1 0 0
   contactMaterial "floor"
-  floorSize 10 11
+  floorSize 12 12
   floorTileSize 1 1
   wallHeight 1.5
-}
-DEF man Pedestrian {
-  translation -2.52161 5 1.27
-  rotation 2.31519e-08 -9.58979e-09 1 -0.785395307179586
-  enableBoundingObject TRUE
 }
 DEF cacaobot Robot {
   translation 0 -1.06 -0.0190075
@@ -3577,6 +3571,7 @@ DEF cacaobot Robot {
       }
     }
     DEF gps GPS {
+      translation 0 -0.59 0
     }
     DEF lidar Lidar {
       translation 7.34642e-08 -0.43 0.66
@@ -3611,7 +3606,7 @@ DEF cacaobot Robot {
   supervisor TRUE
 }
 DEF collection_area Solid {
-  translation 0.83 6.48 -0.04
+  translation 1.29 4.49 -0.04
   children [
     Shape {
       geometry DEF gatherarea Box {
@@ -3621,7 +3616,7 @@ DEF collection_area Solid {
   ]
   name "collection_area"
   model "collection_area"
-  boundingObject USE gatherarea
+  contactMaterial "collection"
   recognitionColors [
     0 0 1
   ]
